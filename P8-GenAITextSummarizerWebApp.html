@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="container">
+            <h2 class="mt-5">Building a Text Summarization Tool Using GenAI and LangChain Framework</h2>
+            <h3>Introduction</h3>
+            <p>The integration of Generative AI (GenAI) with advanced frameworks like LangChain is revolutionizing the way we handle extensive textual data. This project focuses on developing a robust text summarization tool leveraging LangChain, OpenAI's GPT models, and the Streamlit library for creating an intuitive web-based interface. It aims to automate and simplify text summarization processes for academic researchers and industry professionals.</p>
+            <h3>Introduction to LangChain and Its Core Features</h3>
+            <p>LangChain is a Python-based framework designed for seamless integration with Large Language Models (LLMs). It simplifies AI application development through features like prompt engineering, vector embeddings, and real-time data processing. Key components of LangChain include:</p>
+            <ul>
+                <li><strong>Prompt Templates:</strong> These allow developers to structure input prompts for LLMs, tailoring outputs to specific requirements such as bullet-point summaries or detailed analyses.</li>
+                <li><strong>LLMs:</strong> LangChain integrates powerful models like OpenAI’s GPT-3.5 and BLOOM, enabling high-quality textual outputs for diverse applications.</li>
+                <li><strong>Agents:</strong> Agents leverage LLMs to perform tasks like web searches, data manipulation, and intelligent decision-making, making them invaluable in automation.</li>
+            </ul>
+            <h3>Summarization Techniques</h3>
+            <p>LangChain supports two primary methods for summarizing large documents:</p>
+            <ul>
+                <li><strong>Stuffing:</strong> This method feeds the entire document to the LLM in a single call. While fast, it is constrained by the model's token limit.</li>
+                <li><strong>MapReduce:</strong> This multi-stage technique summarizes smaller chunks of text first and combines them into a final summary, overcoming context limitations but requiring more processing time.</li>
+            </ul>
+            <h3>Project Implementation</h3>
+            <p>The project entailed building a web application using Streamlit to provide an accessible interface for summarization tasks. Below are the core steps:</p>
+            <h4>1. Setup and Integration</h4>
+            <p>LangChain was installed and integrated with OpenAI’s GPT-3.5 model via an API key. Required libraries such as PyPDFLoader for document handling and environment files for API key management were configured.</p>
+            <h4>2. Loading and Splitting Text</h4>
+            <p>The PDF document was loaded using the <code>PyPDFLoader</code> function, and its content was split into manageable chunks using LangChain's recursive text splitter. This ensured efficient handling of large documents while maintaining context.</p>
+            <h4>3. Summarization Chains</h4>
+            <p>The Stuffing Chain was implemented for straightforward summarization tasks, while the MapReduce Chain was used for more comprehensive summaries, particularly for extensive texts.</p>
+            <h4>4. Prompt Engineering</h4>
+            <p>Prompt templates were created to tailor summaries for specific audiences, such as IT professionals or high school students. LangChain’s <code>PromptTemplate</code> function facilitated the development of these actionable prompts.</p>
+            <h4>5. Web Application Development</h4>
+            <p>The application was built using Streamlit, featuring:</p>
+            <ul>
+                <li>Input fields for PDF URLs and custom prompts.</li>
+                <li>Chunk size and overlap sliders for dynamic parameter tuning.</li>
+                <li>A "Summarize" button to generate summaries via LangChain’s summarization chains.</li>
+            </ul>
+            <h3>Enhancements for Usability</h3>
+            <p>Additional features included:</p>
+            <ul>
+                <li>A sidebar for selecting summarization methods (Stuffing or MapReduce).</li>
+                <li>Warning messages to inform users about processing times for the MapReduce method.</li>
+                <li>Dynamic prompts tailored to audience expertise levels, improving summarization relevance.</li>
+            </ul>
+            <h3>Results and Observations</h3>
+            <p>The tool successfully automated the summarization of research papers, providing concise outputs in a fraction of the time required for manual reviews. Key outcomes included:</p>
+            <ul>
+                <li><strong>Efficiency:</strong> The Stuffing Chain delivered rapid summaries, suitable for shorter documents.</li>
+                <li><strong>Comprehensiveness:</strong> The MapReduce Chain excelled in capturing detailed insights from extensive documents.</li>
+                <li><strong>Customization:</strong> Prompt engineering allowed users to generate tailored summaries, catering to varying expertise levels.</li>
+            </ul>
+            <h3>Conclusion and Future Directions</h3>
+            <p>This project demonstrates the potential of GenAI frameworks like LangChain in transforming text summarization processes. By integrating LLMs with intuitive interfaces, it bridges the gap between complex AI capabilities and user accessibility. Future enhancements could include:</p>
+            <ul>
+                <li>Adding support for additional LLMs like GPT-4 and Claude.</li>
+                <li>Incorporating features for multilingual summarization.</li>
+                <li>Extending the tool to handle real-time data streams, making it applicable to broader use cases.</li>
+            </ul>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/yourprofile" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/yourprofile" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/yourprofile" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:youremail@example.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
