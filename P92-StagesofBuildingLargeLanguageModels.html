@@ -60,13 +60,13 @@
         </div>
     </header>
     <div class="container">
-        <h1 class="mt-5">2: Stages of Building Large Language Models</h1>
+        <h2 class="mt-5">2: Stages of Building Large Language Models</h2>
         <p>Building large language models (LLMs) involves two primary stages: <strong>pre-training</strong> and <strong>fine-tuning</strong>. Understanding these stages is essential to grasp how LLMs achieve their remarkable versatility and effectiveness in a wide range of tasks. In this article, I will break down these stages, explain their significance, and discuss how they work together to create powerful AI models.</p>
         
-        <h2>Pre-training: The Foundation of LLMs</h2>
+        <h4>Pre-training: The Foundation of LLMs</h4>
         <p>Pre-training is the first step in building an LLM. It involves training the model on a large and diverse dataset to enable it to learn language patterns, context, and relationships. This stage equips the model with a foundational understanding of language, allowing it to perform tasks like text completion, question answering, and sentiment analysis without specific task training.</p>
         
-        <h3>How Pre-training Works</h3>
+        <h4>How Pre-training Works</h4>
         <ul>
             <li><strong>Training Data:</strong>
                 <ul>
@@ -79,7 +79,7 @@
             <li><strong>Objective:</strong> During pre-training, the model’s primary objective is <strong>word prediction</strong>. For instance, given the input "The lion is in the __," the model predicts "forest." This task enables the model to develop an understanding of syntax, grammar, and context.</li>
         </ul>
         
-        <h3>Capabilities of Pre-trained Models</h3>
+        <h4>Capabilities of Pre-trained Models</h4>
         <p>What makes pre-trained models extraordinary is their ability to generalize. Although trained on simple tasks like word prediction, LLMs can perform diverse tasks, such as:</p>
         <ul>
             <li><strong>Translation:</strong> Converting text between languages.</li>
@@ -88,17 +88,17 @@
             <li><strong>Sentiment Analysis:</strong> Detecting emotions or opinions in text.</li>
         </ul>
 
-        <h3>Challenges of Pre-training</h3>
+        <h4>Challenges of Pre-training</h4>
         <ul>
             <li><strong>Data Requirements:</strong> Pre-training requires vast amounts of unlabeled text data.</li>
             <li><strong>Computational Cost:</strong> The computational resources needed are immense. For instance, pre-training GPT-3 cost approximately $4.6 million in computational power.</li>
             <li><strong>Energy Consumption:</strong> Training large models can be energy-intensive, raising concerns about sustainability.</li>
         </ul>
 
-        <h2>Fine-tuning: Customizing the Model</h2>
+        <h4>Fine-tuning: Customizing the Model</h4>
         <p>Fine-tuning is the second stage of building an LLM. This stage refines the pre-trained model by training it on a narrower, task-specific dataset. Fine-tuning enables the model to perform specialized tasks with greater accuracy.</p>
 
-        <h3>How Fine-tuning Works</h3>
+        <h4>How Fine-tuning Works</h4>
         <ul>
             <li><strong>Task-Specific Data:</strong> Fine-tuning uses labeled datasets tailored to the target application. For example:
                 <ul>
@@ -109,14 +109,14 @@
             <li><strong>Objective:</strong> Fine-tuning adjusts the model’s parameters to optimize performance for the desired task. Unlike pre-training, which is unsupervised, fine-tuning typically involves supervised learning with labeled data.</li>
         </ul>
 
-        <h3>Applications of Fine-tuning</h3>
+        <h4>Applications of Fine-tuning</h4>
         <ul>
             <li><strong>Customer Support Chatbots:</strong> Telecom companies, like SK Telecom, use fine-tuning to create chatbots tailored to industry-specific queries.</li>
             <li><strong>Legal AI Platforms:</strong> Tools like Harvey are fine-tuned to assist attorneys by processing legal case histories.</li>
             <li><strong>Financial Analysis Tools:</strong> Banks, such as JP Morgan, fine-tune models to analyze proprietary financial data and generate insights.</li>
         </ul>
 
-        <h3>Pre-training vs. Fine-tuning</h3>
+        <h4>Pre-training vs. Fine-tuning</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -149,7 +149,7 @@
             </tbody>
         </table>
 
-        <h2>Conclusion</h2>
+        <h4>Conclusion</h4>
         <p>The journey of building LLMs begins with pre-training, where models learn from vast datasets, and culminates in fine-tuning, where they adapt to specific needs. These stages form the backbone of modern AI, enabling applications across education, healthcare, legal, and countless other fields. As I continue to explore LLMs, I look forward to diving deeper into the underlying architectures, such as Transformers, and documenting how these concepts translate into real-world applications.</p>
         <p><a class="btn btn-primary" href="P9-BuildingLLMs.html">Back</a></p>
     </div>
