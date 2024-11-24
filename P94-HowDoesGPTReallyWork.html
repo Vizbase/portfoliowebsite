@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="mt-5">4: How does GPT-3 really work?</h2>
+        <p>Generative Pre-Trained Transformers (GPT) represent a monumental leap in natural language processing (NLP), with their ability to understand and generate coherent text in various contexts. This article explores the evolution of GPT models, their learning paradigms—zero-shot and few-shot learning—the datasets and mechanisms powering their training, and the phenomenon of emergent behavior that has captivated researchers and practitioners alike.</p>
+
+        <h4>1. Evolution of GPT Models</h4>
+        <p>The GPT series builds on the foundational Transformer architecture introduced in the 2017 paper "Attention is All You Need." This landmark research introduced the self-attention mechanism, allowing models to capture long-range dependencies in text, a significant improvement over earlier methods like recurrent neural networks (RNNs) and long short-term memory networks (LSTMs).</p>
+        <ul>
+            <li><strong>Transformer (2017):</strong> The original Transformer architecture consisted of encoder and decoder blocks. It was primarily developed for machine translation tasks, such as translating English to German or French.</li>
+            <li><strong>GPT (2018):</strong> Introduced as Generative Pre-Trained Transformer, this model simplified the Transformer architecture by removing the encoder, focusing solely on a decoder for next-word prediction. It relied on unsupervised learning using unlabeled text, pioneering generative pretraining.</li>
+            <li><strong>GPT-2 (2019):</strong> Scaled up significantly with models ranging from 117 million to 1.5 billion parameters. GPT-2 demonstrated remarkable capabilities in generating text but was still confined to research domains.</li>
+            <li><strong>GPT-3 (2020):</strong> With a staggering 175 billion parameters, GPT-3 revolutionized NLP by excelling in a range of tasks, including translation, question answering, and text summarization, despite being trained only for next-word prediction.</li>
+            <li><strong>GPT-4 (2023):</strong> Marked by its superior zero-shot and few-shot learning capabilities, GPT-4 entered the mainstream, becoming a commercially successful model known for its general-purpose applications.</li>
+        </ul>
+
+        <h4>2. Zero-Shot and Few-Shot Learning</h4>
+        <p>GPT models are remarkable for their adaptability, excelling in both zero-shot and few-shot learning scenarios:</p>
+        <ul>
+            <li><strong>Zero-Shot Learning:</strong> The model generalizes to unseen tasks without prior examples. For instance, if prompted with "Translate 'cheese' to French," the model provides "fromage" without additional context or examples.</li>
+            <li><strong>Few-Shot Learning:</strong> The model leverages a few examples to enhance task performance.</li>
+        </ul>
+        <blockquote>
+            <p><strong>Example:</strong> "Sea otter translates to 'loutre de mer.' Peppermint translates to 'menthe poivrée.' Translate 'cheese' to French."</p>
+            <p>The model uses these supporting examples to deliver a precise output, "fromage."</p>
+        </blockquote>
+
+        <h4>3. Datasets for GPT Pretraining</h4>
+        <p>A token, for simplicity, can be considered as a word or subword unit. Training with this data scale ensures that the model captures nuanced patterns across multiple contexts and domains.</p>
+        <p><strong>Training Costs:</strong> Pretraining GPT-3 required $4.6 million, reflecting the computational demands of optimizing 175 billion parameters across billions of text samples. This scale of training highlights the resource-intensive nature of large language models.</p>
+
+        <h4>4. Mechanisms of Pretraining</h4>
+        <h5>Next-Word Prediction:</h5>
+        <p>GPT models are trained through next-word prediction, where the model learns to predict the next word in a sentence based on the preceding context. For example:</p>
+        <blockquote>
+            <p>Input: "The lion is in the..."</p>
+            <p>Output: "jungle."</p>
+        </blockquote>
+        <p>This process involves:</p>
+        <ul>
+            <li>Breaking sentences into input-output pairs during training.</li>
+            <li>Example: Input: "The lion is in the." Output: "jungle."</li>
+            <li>Using predicted outputs as inputs for subsequent iterations, a mechanism called autoregression.</li>
+        </ul>
+        <div class="text-center">
+            <img src="images/GPT Architecture.png" alt="GPT Architecture (Decoder Only)" class="img-fluid">
+            <p><em>Figure: Illustration of the GPT Architecture focusing on the iterative text generation process.</em></p>
+        </div>
+
+        <h4>5. Emergent Behaviors</h4>
+        <p>One of GPT's most fascinating aspects is emergent behavior—its ability to perform tasks it wasn’t explicitly trained for. Despite being designed for next-word prediction, GPT demonstrates remarkable capabilities, such as:</p>
+        <ul>
+            <li>Translation: Converting "breakfast" to "petit déjeuner" in French.</li>
+            <li>Summarization: Condensing articles into concise summaries.</li>
+            <li>Creative Writing: Generating poems, stories, or lesson plans.</li>
+            <li>Mathematics: Performing arithmetic operations like "523 + 248."</li>
+        </ul>
+        <blockquote>
+            <p><strong>Example of Emergent Behavior:</strong></p>
+            <p>GPT models can generate multiple-choice questions (MCQs) on topics like gravity. For instance:</p>
+            <p>Input: "Generate MCQs on gravity."</p>
+            <p>Output: A set of well-structured questions, despite GPT not being explicitly trained for MCQ generation.</p>
+        </blockquote>
+
+        <h4>Conclusion</h4>
+        <p>Generative Pre-Trained Transformers have revolutionized NLP, from their origins in the Transformer architecture to the capabilities demonstrated by GPT-4. Their ability to excel in zero-shot and few-shot learning, coupled with emergent behaviors, makes them indispensable tools across industries. As the field advances, the boundaries of what GPT models can achieve continue to expand, setting the stage for even greater innovations in the future.</p>
+        <p><a class="btn btn-primary" href="P9-BuildingLLMs.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase/PortfolioProjects" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
