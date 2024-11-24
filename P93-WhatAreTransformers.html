@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="mt-5">Exploring Transformer Architectures and Their Role in Large Language Models</h2>
+        <p>In this exploration of Building LLMs: A Personal Exploration, we delve into the critical role of transformer architectures, the backbone of modern LLMs. This article provides an overview of the Transformer architecture, its components, and its evolution into models like BERT and GPT. Additionally, we distinguish Transformers from LLMs and examine their applications in natural language processing (NLP) and beyond.</p>
+        
+        <h4>The Birth of Transformers: "Attention is All You Need"</h4>
+        <p>Transformers were introduced in the groundbreaking 2017 paper <em>Attention is All You Need</em>. This architecture revolutionized NLP by replacing traditional sequence-based models like recurrent neural networks (RNNs) and long short-term memory networks (LSTMs). Originally designed for machine translation tasks—such as converting English text to German or French—Transformers have since been adapted to a wide array of NLP applications.</p>
+        <p>The core idea of Transformers is the self-attention mechanism, which allows models to weigh the importance of different words in a sequence relative to each other. This approach enables long-range dependencies in text to be effectively captured, which is vital for understanding context and generating coherent responses.</p>
+
+        <h4>Key Components of Transformer Architecture</h4>
+        <p>The Transformer architecture consists of two primary components:</p>
+        <ul>
+            <li><strong>Encoder:</strong> Processes the input text and converts it into a vectorized representation known as embeddings.</li>
+            <li><strong>Decoder:</strong> Uses these embeddings and partial output to generate the final output text, one word at a time.</li>
+        </ul>
+        <h4>Step-by-Step Process in Transformers:</h4>
+        <ul>
+            <li><strong>Input Text:</strong> Sentences are tokenized, breaking them into smaller units (tokens), which are assigned unique identifiers.</li>
+            <li><strong>Tokenization:</strong> Converts sentences into tokens, such as words or subwords, to prepare the text for further processing.</li>
+            <li><strong>Vector Embedding:</strong> The encoder maps tokens to high-dimensional vector representations. Words with similar meanings (e.g., “dog” and “puppy”) are positioned closer together in this vector space, capturing semantic relationships.</li>
+            <li><strong>Self-Attention Mechanism:</strong> Determines the importance of each token relative to others, allowing the model to focus on the most relevant parts of the input text.</li>
+            <li><strong>Feedforward Layers:</strong> Neural network layers process embeddings to extract deeper patterns and refine the model’s understanding.</li>
+            <li><strong>Decoder Generation:</strong> The decoder takes embeddings and partial output to predict the next token. This process continues iteratively until the full output is generated.</li>
+        </ul>
+
+        <h4>The Role of Self-Attention Mechanism</h4>
+        <p>The self-attention mechanism is the heart of the Transformer architecture. It calculates an attention score for each token, determining its relevance to other tokens in the sequence. This mechanism enables the model to capture long-range dependencies, ensuring contextually accurate predictions even for distant relationships within a sentence.</p>
+        <p>For example, in the sentence:</p>
+        <blockquote>"Harry Potter boarded the train at platform nine and three-quarters."</blockquote>
+        <p>To predict the next word in a subsequent sentence, the model needs to focus on terms like "Harry Potter" and "train." The self-attention mechanism dynamically weighs these terms’ importance, facilitating accurate predictions.</p>
+
+        <h4>Variants of Transformer Models: BERT vs. GPT</h4>
+        <p>Transformers have evolved into specialized architectures like BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformers). These models address different NLP challenges.</p>
+        <h4>BERT:</h4>
+        <ul>
+            <li><strong>Purpose:</strong> Predicts masked words within a sentence.</li>
+            <li><strong>Architecture:</strong> Utilizes only the encoder, making it bidirectional—able to analyze context from both directions.</li>
+            <li><strong>Applications:</strong> Ideal for sentiment analysis, question answering, and understanding nuanced text relationships.</li>
+        </ul>
+        <p><strong>Example:</strong><br>Input: "This is an [MASK] of how LLMs [MASK] work."<br>Output: "This is an example of how LLMs can work."</p>
+        
+        <h4>GPT:</h4>
+        <ul>
+            <li><strong>Purpose:</strong> Generates the next word in a sequence.</li>
+            <li><strong>Architecture:</strong> Uses only the decoder, operating in a unidirectional (left-to-right) manner.</li>
+            <li><strong>Applications:</strong> Powers chatbots, text completion, and creative content generation.</li>
+        </ul>
+        <p><strong>Example:</strong><br>Input: "This is an example of how LLMs can"<br>Output: "This is an example of how LLMs can perform."</p>
+
+        <h4>Key Differences:</h4>
+        <ul>
+            <li><strong>Directionality:</strong> BERT is bidirectional; GPT is unidirectional.</li>
+            <li><strong>Functionality:</strong> BERT predicts masked words, while GPT generates new words.</li>
+        </ul>
+
+        <h4>Transformers vs. LLMs</h4>
+        <p>While Transformers are the foundation of many LLMs, not all Transformers are LLMs, and vice versa:</p>
+        <ul>
+            <li><strong>Not All Transformers Are LLMs:</strong> Transformers are also used in tasks like computer vision (e.g., Vision Transformers for image classification).</li>
+            <li><strong>Not All LLMs Are Transformers:</strong> Early LLMs utilized architectures like RNNs and LSTMs before Transformers became dominant.</li>
+        </ul>
+        <p>For example, Vision Transformers (ViTs) have demonstrated remarkable results in image classification tasks, rivaling convolutional neural networks (CNNs) while requiring fewer computational resources.</p>
+
+        <h4>The Evolution of NLP: From RNNs to Transformers</h4>
+        <p>Before Transformers, RNNs and LSTMs were widely used for sequence modeling. These architectures maintain memory to capture context but are less efficient than Transformers for processing long sequences. Key distinctions include:</p>
+        <ul>
+            <li><strong>RNNs:</strong> Maintain a feedback loop to incorporate memory but struggle with long-term dependencies.</li>
+            <li><strong>LSTMs:</strong> Introduce separate pathways for short-term and long-term memory, improving context retention.</li>
+            <li><strong>Transformers:</strong> Eliminate sequential processing constraints, leveraging self-attention to handle entire sequences in parallel.</li>
+        </ul>
+
+        <h4>Conclusion</h4>
+        <p>The Transformer architecture has revolutionized NLP, enabling the development of versatile LLMs like BERT and GPT. Its self-attention mechanism and efficient handling of context have set new benchmarks for tasks ranging from translation to content generation. Understanding these foundational concepts is crucial for appreciating the transformative potential of LLMs and their applications across industries.</p>
+        <p>As I continue exploring Transformers and their variations, I aim to deepen my understanding of self-attention, embeddings, and the nuances of architectures like BERT and GPT. This journey underscores the intricate yet fascinating world of LLMs, offering a solid foundation for further advancements in AI.</p>
+        <p><a class="btn btn-primary" href="P9-BuildingLLMs.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
