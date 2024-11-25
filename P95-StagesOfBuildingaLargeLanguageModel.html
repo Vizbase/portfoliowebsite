@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="mt-5">Stages of Building a Large Language Model (LLM): A Roadmap</h2>
+        <p>This lecture focuses on outlining the stages required to build a large language model (LLM) from scratch. After covering foundational concepts in previous lectures—such as the Transformer architecture, attention mechanisms, and the evolution from GPT to GPT-4—we now shift our focus to the step-by-step process of creating an LLM. This roadmap divides the process into three main stages: data preparation and architecture design, pre-training, and fine-tuning. Additionally, we will recap key concepts covered so far to solidify our understanding.</p>
+        
+        <h3>Stage 1: Data Preparation and Architecture Design</h3>
+        <p>Before training an LLM, we must carefully prepare the data and understand the underlying architecture. Stage 1 encompasses the following components:</p>
+        <h5>1. Data Preparation and Sampling</h5>
+        <ul>
+            <li><strong>Tokenization:</strong> Text data is split into smaller units called tokens. For example, the sentence "Learning is fun" might be tokenized into words like "Learning," "is," and "fun" or into subwords like "Learn" and "ing." This step is crucial for enabling the model to process text effectively.</li>
+            <li><strong>Vector Embedding:</strong> Tokens are converted into high-dimensional vector representations. This step ensures that semantically related words, such as "apple," "banana," and "orange," are positioned closer together in vector space. For example:
+                <ul>
+                    <li>Fruits (red cluster): Apple, Banana, Orange</li>
+                    <li>People (blue cluster): King, Queen, Woman</li>
+                    <li>Sports (green cluster): Tennis, Golf, Football</li>
+                </ul>
+            </li>
+            <li><strong>Positional Encoding:</strong> Since the order of words matters in language, positional encoding captures the sequence of words in a sentence. For example, in "The cat sat on the mat," the positional encoding ensures the model understands the correct order.</li>
+            <li><strong>Batching Data:</strong> To efficiently train the model, the dataset is divided into smaller batches. These batches allow the model to process data incrementally, reducing computational strain.</li>
+        </ul>
+        <h5>2. Attention Mechanisms</h5>
+        <ul>
+            <li><strong>Multi-Head Attention:</strong> This mechanism allows the model to focus on different parts of the input simultaneously. For example, in the sentence "The cat sat on the mat," one attention head might focus on "cat" while another focuses on "mat."</li>
+            <li><strong>Key-Query-Value System:</strong> The attention mechanism uses a scoring system (keys and queries) to determine the importance of each token in the input.</li>
+            <li><strong>Positional Encoding Integration:</strong> The model incorporates positional information into the attention mechanism to maintain sentence structure.</li>
+        </ul>
+        <h5>3. LLM Architecture</h5>
+        <ul>
+            <li><strong>Layer Stacking:</strong> Multiple Transformer layers are stacked to increase the model's depth and capability.</li>
+            <li><strong>Configuring Attention Heads:</strong> Determining the number and placement of attention heads in the architecture.</li>
+            <li><strong>Decoder-Only Architecture:</strong> GPT models use only a decoder (unlike Transformers, which include both encoder and decoder).</li>
+        </ul>
+        <p>The outcome of Stage 1 is a complete understanding of data preparation and the foundational LLM architecture, setting the stage for training.</p>
+
+        <h3>Stage 2: Pre-Training</h3>
+        <p>Pre-training focuses on training the LLM using large, unlabeled datasets to develop a foundational understanding of language. Key components include:</p>
+        <h5>1. Training Loop</h5>
+        <ul>
+            <li><strong>Next-Word Prediction:</strong> The model is trained to predict the next word in a sequence. For example:
+                <blockquote>
+                    <p>Input: "The lion is in the"</p>
+                    <p>Output: "jungle"</p>
+                </blockquote>
+            </li>
+            <li><strong>Autoregressive Learning:</strong> The model uses previous predictions as inputs for subsequent steps. For example:
+                <ul>
+                    <li>Iteration 1: Input: "The lion is in the" → Output: "jungle"</li>
+                    <li>Iteration 2: Input: "The lion is in the jungle" → Output: "roars"</li>
+                </ul>
+            </li>
+        </ul>
+        <h5>2. Gradient Descent and Loss Optimization</h5>
+        <ul>
+            <li>Gradients are calculated to minimize the difference between predicted and actual outputs.</li>
+            <li>Model weights (parameters) are updated to improve performance iteratively.</li>
+        </ul>
+        <h5>3. Saving and Loading Weights</h5>
+        <p>Training a large model is computationally expensive. To save time and resources, model weights are saved periodically. Pre-trained weights from OpenAI can also be integrated to accelerate development.</p>
+        <p>The goal of Stage 2 is to produce a pre-trained foundational model capable of general language understanding. For example, GPT-3 was pre-trained on 300 billion tokens at a cost of $4.6 million.</p>
+
+        <h3>Stage 3: Fine-Tuning</h3>
+        <p>Fine-tuning adapts the pre-trained model for specific tasks by training it on smaller, labeled datasets. This stage includes:</p>
+        <h5>1. Task-Specific Fine-Tuning</h5>
+        <ul>
+            <li><strong>Example: Email Classification</strong>
+                <ul>
+                    <li><strong>Dataset:</strong> Emails labeled as "spam" or "not spam."</li>
+                    <li><strong>Goal:</strong> Train the LLM to classify emails accurately.</li>
+                </ul>
+            </li>
+            <li><strong>Example: Chatbot Development</strong>
+                <ul>
+                    <li><strong>Dataset:</strong> Pairs of instructions and expected outputs.</li>
+                    <li><strong>Goal:</strong> Build a conversational agent capable of answering queries.</li>
+                </ul>
+            </li>
+        </ul>
+        <h5>2. Labeling Data</h5>
+        <p>Fine-tuning requires manually labeled datasets, unlike pre-training, which uses unlabeled data. For example:</p>
+        <blockquote>
+            <p>Input: "You are a winner! Claim your prize now."</p>
+            <p>Label: "Spam"</p>
+        </blockquote>
+        <h5>3. Improved Performance</h5>
+        <p>Fine-tuned models outperform pre-trained models on specific tasks, making them essential for production-level applications.</p>
+
+        <h3>Key Concepts Recap</h3>
+        <ul>
+            <li><strong>Pre-Training vs. Fine-Tuning:</strong>
+                <ul>
+                    <li>Pre-training involves learning general language patterns from vast unlabeled datasets.</li>
+                    <li>Fine-tuning focuses on specific tasks using smaller labeled datasets.</li>
+                </ul>
+            </li>
+            <li><strong>Transformer vs. GPT:</strong>
+                <ul>
+                    <li>Transformers use both encoder and decoder blocks.</li>
+                    <li>GPT models are decoder-only architectures.</li>
+                </ul>
+            </li>
+            <li><strong>Emergent Behavior:</strong> Despite being trained only for next-word prediction, LLMs exhibit capabilities like text summarization, translation, and multiple-choice question generation. For example:
+                <blockquote>
+                    <p>Input: "Generate MCQs on gravity."</p>
+                    <p>Output: A set of well-structured questions.</p>
+                </blockquote>
+            </li>
+        </ul>
+
+        <h3>Conclusion</h3>
+        <p>This roadmap lays the groundwork for building an LLM from scratch. Stage 1 focuses on data preparation and architecture design, Stage 2 on pre-training, and Stage 3 on fine-tuning for specific applications. From the next lecture, we will begin Stage 1 with practical coding exercises, starting with text data preparation. By combining theoretical understanding with hands-on implementation, this series aims to provide a comprehensive guide to mastering LLM development.</p>
+        <p><a class="btn btn-primary" href="P9-BuildingLLMs.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/vizbase/PortfolioProjects" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
