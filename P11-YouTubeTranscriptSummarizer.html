@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="mt-5">YouTube Transcript Summarizer</h2>
+        <p>The YouTube Transcript Summarizer is an AI-powered tool designed to convert YouTube video transcripts into concise, insightful summaries. This project leverages advanced AI technologies, including large language models (LLMs) and the Streamlit framework, to create a simple, user-friendly interface for summarizing videos based on transcripts.</p>
+
+        <h3>Project Overview</h3>
+        <p>The goal of this project is to streamline the process of understanding long and complex YouTube video transcripts. Whether for academic purposes, professional needs, or casual learning, the summarizer efficiently extracts key points, themes, and conclusions, reducing the time required to grasp the video's essence.</p>
+
+        <h3>Key Features</h3>
+        <ul>
+            <li><strong>Transcript Extraction:</strong> Automatically fetches the transcript of any YouTube video using its URL.</li>
+            <li><strong>Summarization:</strong> Generates summaries tailored to different difficulty levels: Beginner-Friendly, Intermediate, and Advanced/Technical.</li>
+            <li><strong>Customizable Length:</strong> Users can adjust the summary length with a slider.</li>
+            <li><strong>Translation:</strong> Translates summaries into multiple languages (English, German, Dutch) while maintaining the original format (bullet points or paragraphs).</li>
+            <li><strong>User-Friendly Interface:</strong> Built using Streamlit, the tool is accessible and easy to use for both technical and non-technical users.</li>
+        </ul>
+
+        <h3>Technical Architecture</h3>
+        <p>The YouTube Transcript Summarizer combines several technologies to deliver a seamless experience:</p>
+        
+        <h4>1. Transcript Retrieval</h4>
+        <p>The project uses the <code>YouTubeTranscriptApi</code> Python library to extract transcripts from YouTube videos. It handles different YouTube URL formats and ensures that the transcript is properly formatted for processing.</p>
+
+        <h4>2. Summarization with OpenAI API</h4>
+        <p>The summarization process leverages OpenAI's GPT-based models (e.g., GPT-3.5 or GPT-4). Users can customize the summary format (bullet points or paragraphs), difficulty level, and length:</p>
+        <ul>
+            <li><strong>Beginner-Friendly:</strong> Simplified summaries for younger or non-technical audiences.</li>
+            <li><strong>Intermediate:</strong> Balanced summaries with moderate technical details.</li>
+            <li><strong>Advanced/Technical:</strong> Detailed summaries using technical terminology for professional audiences.</li>
+        </ul>
+
+        <h4>3. Translation</h4>
+        <p>The tool uses OpenAI's API to translate summaries into selected languages (German, Dutch, or English). It ensures the translation retains the original format (bullet points or paragraphs) for consistency.</p>
+
+        <h3>Workflow</h3>
+        <ol>
+            <li><strong>Input:</strong> User enters a YouTube video URL.</li>
+            <li><strong>Transcript Retrieval:</strong> The tool fetches the transcript using the YouTubeTranscriptApi library.</li>
+            <li><strong>Summary Generation:</strong> The transcript is summarized based on user-selected settings (difficulty level, format, and length).</li>
+            <li><strong>Translation (Optional):</strong> The summary is translated into the chosen language.</li>
+            <li><strong>Output:</strong> The summarized and translated content is displayed in the Streamlit app.</li>
+        </ol>
+
+        <h3>Technologies Used</h3>
+        <ul>
+            <li><strong>YouTubeTranscriptApi:</strong> A Python library for extracting YouTube video transcripts.</li>
+            <li><strong>Streamlit:</strong> A Python framework for building user-friendly web applications.</li>
+            <li><strong>OpenAI API:</strong> GPT-based language models for summarization and translation.</li>
+            <li><strong>Python:</strong> The core programming language used for development.</li>
+        </ul>
+
+        <h3>Benefits</h3>
+        <ul>
+            <li><strong>Time-Saving:</strong> Reduces the effort required to understand lengthy video content.</li>
+            <li><strong>Accessibility:</strong> Makes video content accessible to non-native speakers through translation.</li>
+            <li><strong>Customizable:</strong> Allows users to adjust summaries based on their specific needs and preferences.</li>
+            <li><strong>Efficiency:</strong> Automates the tedious process of manually extracting insights from video transcripts.</li>
+        </ul>
+
+        <h3>Python Code Explanation</h3>
+        <h4>1. Importing Libraries</h4>
+        <p>The script starts by importing essential libraries:</p>
+        <ul>
+            <li><code>youtube_transcript_api</code>: Extracts YouTube video transcripts.</li>
+            <li><code>streamlit</code>: Creates the interactive user interface for the app.</li>
+            <li><code>openai</code>: Provides access to OpenAI's GPT models for summarization and translation.</li>
+            <li><code>dotenv</code>: Loads environment variables securely, such as the OpenAI API key.</li>
+            <li><code>os</code>: Handles file system interactions and environment variables.</li>
+        </ul>
+
+        <h4>2. Loading the API Key</h4>
+        <p>The OpenAI API key is loaded using the <code>load_dotenv</code> function, ensuring secure access without hardcoding sensitive information into the script.</p>
+
+        <h4>3. Extracting Transcripts</h4>
+        <p>The <code>extract_transcript</code> function handles transcript retrieval:</p>
+        <ul>
+            <li>Accepts a YouTube URL as input.</li>
+            <li>Parses the video ID from various URL formats.</li>
+            <li>Uses <code>YouTubeTranscriptApi</code> to fetch the transcript and combines it into a single string.</li>
+            <li>Returns either the transcript or an error message.</li>
+        </ul>
+
+        <h4>4. Summarization</h4>
+        <p>The <code>summarize_text</code> function generates summaries using OpenAI's ChatCompletion API:</p>
+        <ul>
+            <li>Accepts the transcript, summary format, length, and difficulty level as inputs.</li>
+            <li>Constructs a custom prompt based on user-selected options.</li>
+            <li>Limits the output length using the <code>max_tokens</code> parameter.</li>
+            <li>Handles errors gracefully and returns the summary.</li>
+        </ul>
+
+        <h4>5. Translation</h4>
+        <p>The <code>translate_text</code> function translates summaries into selected languages:</p>
+        <ul>
+            <li>Ensures the translation maintains the original format (bullet points or paragraphs).</li>
+            <li>Uses a language map to handle supported languages.</li>
+            <li>Generates a prompt for OpenAI's API to produce the translation.</li>
+        </ul>
+
+        <h4>6. Streamlit Interface</h4>
+        <p>The Streamlit UI allows users to:</p>
+        <ul>
+            <li>Enter the YouTube video link in a text box.</li>
+            <li>Adjust summary settings such as length, difficulty level, and output format (bullet points or paragraphs).</li>
+            <li>Select a target language for translation if needed.</li>
+            <li>View the extracted transcript and generated summary within the app interface.</li>
+        </ul>
+        <p>The app displays the video thumbnail as a quick confirmation of the correct video link and provides error messages for invalid inputs or issues during transcript retrieval.</p>
+
+        <h4>7. Error Handling</h4>
+        <p>The code includes robust error-handling mechanisms to ensure smooth functionality:</p>
+        <ul>
+            <li>Invalid YouTube URLs trigger an error message prompting the user to correct their input.</li>
+            <li>Errors during API calls (e.g., summarization or translation) are captured and displayed to the user.</li>
+            <li>If the transcript length exceeds a certain limit, a warning is shown, and the transcript is truncated to fit the token constraints of the OpenAI API.</li>
+        </ul>
+
+        <h4>8. Dynamic Session Management</h4>
+        <p>The app leverages Streamlit's session state to optimize performance and user experience:</p>
+        <ul>
+            <li><strong>Transcript Caching:</strong> The transcript is fetched only once per session to reduce redundant API calls and improve efficiency.</li>
+            <li><strong>Video ID Tracking:</strong> Ensures that the correct transcript is associated with the provided video link throughout the session.</li>
+        </ul>
+
+        <h3>Conclusion</h3>
+        <p>This project demonstrates the integration of advanced AI tools, such as OpenAI's GPT models and the YouTubeTranscriptApi, into a user-friendly web application. By automating transcript summarization and translation, it addresses real-world needs for quick and accessible insights into video content.</p>
+
+        <p>Explore the code and contribute to its development on <a href="https://github.com/Vizbase/YouTube-Transcript-Summarizer/tree/main" target="_blank">GitHub</a>.</p>
+        <img src="images/YouTube Transcript Summarizer1.png" class="img-fluid">
+        <img src="images/YouTube Transcript Summarizer2.png" class="img-fluid">
+        <p><a class="btn btn-primary" href="projects.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
+
