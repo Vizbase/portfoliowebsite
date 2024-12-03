@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+        .code-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="mt-5">RAG Chatbot for Technical Documentation: A Step-by-Step Guide</h2>
+        <p>In today’s fast-paced world, information needs to be easily accessible, especially in complex fields like automotive technology. This project focuses on building a context-aware chatbot that integrates technical documentation using Retrieval-Augmented Generation (RAG). The chatbot provides users with precise answers based on the information retrieved from a car manual, specifically the MG ZS car manual. It retrieves relevant information from the manual and uses a large language model (LLM) to generate human-like responses.</p>
+    
+        <h3>Project Overview</h3>
+        <p>The objective of this project is to create a chatbot that interprets and responds to warning messages from a car’s manual. The system leverages large language models (LLMs) to provide contextually accurate responses based on technical documentation. The chatbot retrieves information from the manual and generates answers to user queries about car warnings.</p>
+    
+        <h3>Tech Stack Used</h3>
+        <ul>
+            <li><strong>LangChain:</strong> A library that simplifies building applications powered by LLMs, used for handling document retrieval and response generation.</li>
+            <li><strong>OpenAI GPT-4:</strong> A language model used to generate concise answers based on retrieved documents.</li>
+            <li><strong>Chroma:</strong> A vector store that manages document embeddings for fast retrieval.</li>
+            <li><strong>Python:</strong> The programming language used for data processing, model integration, and system orchestration.</li>
+            <li><strong>HTML Document:</strong> The car manual containing warning messages, parsed and split for efficient processing.</li>
+        </ul>
+    
+        <h3>The Key Components of the Project</h3>
+    
+        <h4>1. Document Retrieval</h4>
+        <p>The first step is to split the technical documentation (the car manual) into smaller, manageable chunks. The <code>RecursiveCharacterTextSplitter</code> from LangChain was used to achieve this. This ensures that relevant information can be efficiently retrieved based on the user’s query.</p>
+        <pre class="code-box"><code>
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+    
+    # Initialize the splitter
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    
+    # Split the HTML document
+    splits = text_splitter.split_documents(car_docs)
+        </code></pre>
+    
+        <h4>2. Embedding and Vectorization</h4>
+        <p>The next step is to convert the document chunks into embeddings. These embeddings represent the semantic meaning of the text and allow the system to process it efficiently. The OpenAI Embeddings API is used to generate these embeddings.</p>
+        <pre class="code-box"><code>
+    from langchain_openai import OpenAIEmbeddings
+    from langchain_chroma import Chroma
+    
+    # Initialize Chroma vectorstore with documents as splits
+    vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(openai_api_key=openai_api_key))
+        </code></pre>
+    
+        <h4>3. Setting Up the Retriever</h4>
+        <p>After embedding the documents, a retriever is configured to fetch the most relevant document chunks based on the user’s query. This component is essential for the RAG model, as it retrieves context from the stored documents.</p>
+        <pre class="code-box"><code>
+    retriever = vectorstore.as_retriever()
+        </code></pre>
+    
+        <h4>4. Creating a Prompt Template</h4>
+        <p>To guide the LLM in generating useful responses, a custom prompt template is created. The prompt instructs the LLM to answer based on the retrieved context.</p>
+        <pre class="code-box"><code>
+    from langchain_core.prompts import ChatPromptTemplate
+    
+    # Define the RAG prompt template
+    prompt = ChatPromptTemplate.from_template(
+        "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. "
+        "If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\n"
+        "Question: {question} \nContext: {context} \nAnswer:"
+    )
+        </code></pre>
+    
+        <h4>5. Integrating the Language Model (LLM)</h4>
+        <p>The next step is to initialize the OpenAI GPT-4o-mini model, which will be used to generate responses based on the retrieved context.</p>
+        <pre class="code-box"><code>
+    from langchain_openai import ChatOpenAI
+    
+    # Initialize LLM with gpt-4o-mini model
+    model = ChatOpenAI(openai_api_key=openai_api_key, model_name="gpt-4o-mini", temperature=0)
+        </code></pre>
+    
+        <h4>6. Building the RAG Chain</h4>
+        <p>The retriever, prompt template, and LLM are connected in a single pipeline, known as the RAG chain. This chain processes the user query, retrieves relevant context, and generates a response.</p>
+        <pre class="code-box"><code>
+    from langchain_core.runnables import RunnablePassthrough
+    
+    # Setup RAG chain
+    rag_chain = (
+        {"context": retriever, "question": RunnablePassthrough()}
+        | prompt
+        | model
+    )
+        </code></pre>
+    
+        <h4>7. Testing the System</h4>
+        <p>To test the system, a query such as:</p>
+        <pre class="code-box"><code>
+    query = "The Gasoline Particular Filter Full warning has appeared. What does this mean and what should I do about it?"
+        </code></pre>
+        <p>The model generates an accurate and concise response:</p>
+        <p><strong>"The Gasoline Particular Filter Full warning indicates that the gasoline particulate filter is full. You should consult an MG Authorised Repairer as soon as possible for assistance."</strong></p>
+    
+        <h3>The Outcome and Results</h3>
+        <p>The chatbot efficiently retrieves relevant context from the car manual and provides actionable answers to user queries. By implementing the RAG architecture, the system ensures that the responses are always grounded in the available documentation. This solution can be used in a variety of domains where retrieving context from technical documents is necessary.</p>
+    
+        <h3>Conclusion</h3>
+        <p>This project illustrates how a combination of document retrieval, embeddings, and LLMs can be used to build a sophisticated question-answering system. The RAG-based approach allows for efficient handling of large amounts of information, providing users with precise and concise answers based on context.</p>
+        <p><a class="btn btn-primary" href="projects.html">Back</a></p>    
+    </div>
+    
+
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
