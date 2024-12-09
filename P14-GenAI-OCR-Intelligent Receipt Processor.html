@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+        .code-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="mt-5">GenAI-OCR: Intelligent Receipt Processor</h2>
+        <p>Receipt processing is an essential yet challenging task in fields like accounting, logistics, and retail. From extracting item details to formatting structured data, the variability of receipts makes automation a complex problem. To address this, I developed <strong>GenAI-OCR: Intelligent Receipt Processor</strong>, a project that combines the power of Generative AI (GenAI) models through <strong>OpenRouter</strong> and uses <strong>Command-R</strong> as a decision engine for robust output validation.</p>
+        <p>This project demonstrates how cutting-edge AI models can collaborate to automate workflows that traditionally required manual effort. In this article, I’ll discuss the technical implementation, the role of Generative AI in the pipeline, and the models used to bring this project to life.</p>
+    
+        <h3>What is Generative AI (GenAI)?</h3>
+        <p>Generative AI refers to models designed to create or generate content—whether it’s text, images, audio, or structured data—based on input instructions. In this project:</p>
+        <ul>
+            <li><strong>OCR models</strong> like PixTral-12B, Qwen-2V, and LLaMA-3.2 generate structured LaTeX tables from receipt images.</li>
+            <li><strong>Command-R</strong> analyzes the outputs of these models and generates the best result by evaluating their accuracy and completeness.</li>
+        </ul>
+        <p>The project combines these generative AI models to automate receipt processing with high accuracy, showcasing the potential of GenAI in solving real-world problems.</p>
+    
+        <h3>What is OpenRouter?</h3>
+        <p><strong>OpenRouter</strong> is a platform that simplifies access to multiple AI models through a unified API. Instead of juggling multiple APIs and configurations, developers can use OpenRouter to:</p>
+        <ul>
+            <li>Access state-of-the-art models for tasks like OCR and decision-making.</li>
+            <li>Integrate models seamlessly into workflows.</li>
+        </ul>
+        <p>For this project, OpenRouter connected me to PixTral-12B, Qwen-2V, and LLaMA-3.2 for OCR tasks, as well as Command-R for decision-making.</p>
+    
+        <h3>The Technology Stack</h3>
+        <ul>
+            <li><strong>OCR Models via OpenRouter</strong>: PixTral-12B, Qwen-2V, LLaMA-3.2</li>
+            <li><strong>Decision Engine</strong>: Command-R</li>
+            <li><strong>Generative AI Workflow</strong>: Combining multiple generative models via OpenRouter and Command-R</li>
+        </ul>
+    
+        <h3>How the System Works</h3>
+        <h4>1. Input: Receipt Image</h4>
+        <p>The user uploads a receipt image, which is encoded as a base64 string and sent to the OpenRouter API.</p>
+    
+        <h4>2. Data Extraction: OCR Models</h4>
+        <p>Each OCR model processes the receipt and generates a LaTeX table containing:</p>
+        <ul>
+            <li><strong>Item Code</strong>: Unique identifier for each item.</li>
+            <li><strong>Item Name</strong>: Product name as listed on the receipt.</li>
+            <li><strong>Item Price</strong>: Price of each item.</li>
+            <li><strong>Total Price</strong>: Final amount at the bottom of the receipt.</li>
+        </ul>
+    
+        <h4>3. Validation: Command-R</h4>
+        <p>Command-R evaluates the LaTeX tables based on:</p>
+        <ul>
+            <li>Logical consistency: Do the items and prices add up correctly?</li>
+            <li>Structural accuracy: Is the LaTeX code properly formatted?</li>
+            <li>Completeness: Are all items represented?</li>
+        </ul>
+    
+        <h4>4. Output: Final LaTeX Table</h4>
+        <p>Command-R returns the best table, ensuring the output is accurate and usable.</p>
+    
+        <h3>Prompts: Crafting Precision</h3>
+        <h4>OCR Model Prompt</h4>
+        <p>To ensure accurate extraction, the following prompt was designed:</p>
+        <pre class="code-box"><code>
+    Extract the following information from this receipt:
+    1. Item Code: A unique code for each item.
+    2. Item Name: The name of the item.
+    3. Item Price: The price of the item.
+    4. Total Price: The final price at the bottom of the receipt.
+    
+    Organize the data into a LaTeX table with headers: `Item Code`, `Item Name`, `Item Price`, and `Total Price`.
+    Return only the LaTeX code. Do not include any explanations or extra text.
+        </code></pre>
+    
+        <h4>Command-R Prompt</h4>
+        <p>Command-R was tasked with evaluating the outputs using this prompt:</p>
+        <pre class="code-box"><code>
+    You are a decision engine called Command-R.
+    
+    Your task is to analyze multiple LaTeX tables extracted from a receipt and select the most accurate and complete one.
+    
+    ### Receipt Item Details:
+    - Item Code: Unique identifier.
+    - Item Name: Product name.
+    - Item Price: Price in the format `X.XX EUR`.
+    
+    ### Criteria for Selection:
+    1. Logical accuracy: Do the items and totals match the receipt?
+    2. Structural correctness: Is the LaTeX code valid and properly formatted?
+    3. Completeness: Are all items and the total price included?
+    
+    Return only the LaTeX code for the best table. Do not add any explanations.
+        </code></pre>
+    
+        <h3>Challenges and Solutions</h3>
+        <h4>1. Variability in Receipt Formats</h4>
+        <p>Different receipts have varying structures and languages. Using multiple OCR models via OpenRouter provided flexibility to handle diverse cases.</p>
+    
+        <h4>2. Ensuring Accuracy</h4>
+        <p>OCR models occasionally made mistakes. Command-R added a critical layer of validation, ensuring only the most accurate results were returned.</p>
+    
+        <h4>3. Prompt Engineering</h4>
+        <p>Creating clear and specific prompts was essential for guiding the models to generate reliable outputs.</p>
+    
+        <h3>Why GenAI?</h3>
+        <p>This project highlights the transformative potential of Generative AI:</p>
+        <ul>
+            <li><strong>Automating Complex Workflows</strong>: From data extraction to decision-making, GenAI models replaced manual processes.</li>
+            <li><strong>Collaboration Between Models</strong>: OpenRouter enabled seamless integration of OCR and decision-making models.</li>
+            <li><strong>High Accuracy</strong>: Combining multiple models with Command-R validation ensured robust results.</li>
+        </ul>
+    
+        <h3>Conclusion</h3>
+        <p><strong>GenAI-OCR: Intelligent Receipt Processor</strong> demonstrates how developers can use Generative AI to automate and enhance workflows. By leveraging OpenRouter for model integration and Command-R for decision-making, this project achieves high accuracy and reliability in receipt processing.</p>
+        <p>If you’d like to explore the code, check out the <a href="#">GitHub repository</a>. Let me know your thoughts and ideas for future improvements!</p>
+    
+        <p><a class="btn btn-primary" href="projects.html">Back</a></p>    
+    </div>
+    
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>    
