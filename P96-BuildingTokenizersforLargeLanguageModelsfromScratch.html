@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="mt-5">6: Building Tokenizers for Large Language Models</h1>
+    
+        <p>
+            Tokenization is one of the most crucial steps in building large language models (LLMs) from scratch. 
+            It plays a foundational role in data preprocessing, which ultimately impacts the training and performance 
+            of the LLM. In simple terms, tokenization is the process of breaking down text into smaller components 
+            called tokens. These tokens are later converted into numerical identifiers, called token IDs, which are 
+            used as inputs for machine learning models.
+        </p>
+    
+        <h2>1. Introduction</h2>
+        <p>
+            In this chapter, we delve into the mechanics of tokenization, exploring concepts such as splitting text 
+            into tokens, mapping tokens to unique token IDs, handling out-of-vocabulary (OOV) words, and using special 
+            tokens like <code>[UNK]</code> (unknown token) and <code>[END]</code> (end-of-text token). We will build 
+            a tokenizer from scratch using Python, gaining a hands-on understanding of how modern LLMs, like GPT, 
+            handle tokenization.
+        </p>
+    
+        <h2>2. Stages of Building Large Language Models</h2>
+        <ul>
+            <li><strong>Stage 1: Data Preparation and Tokenization</strong>
+                <ul>
+                    <li>Preprocess input data</li>
+                    <li>Tokenize input data into tokens</li>
+                    <li>Convert tokens to token IDs</li>
+                </ul>
+            </li>
+            <li><strong>Stage 2: Pre-training</strong>
+                <ul>
+                    <li>Train a foundational LLM using massive datasets</li>
+                    <li>Load pre-trained weights for reuse in specific applications</li>
+                </ul>
+            </li>
+            <li><strong>Stage 3: Fine-tuning</strong>
+                <ul>
+                    <li>Fine-tune the model on specific, smaller datasets for custom applications</li>
+                    <li>Examples: chatbots, classifiers, or domain-specific assistants</li>
+                </ul>
+            </li>
+        </ul>
+    
+        <h2>3. Understanding Tokenization</h2>
+        <p>
+            Tokenization is a critical preprocessing step in working with textual data for machine learning. 
+            It essentially transforms text into smaller, meaningful pieces called <em>tokens</em>. These tokens 
+            can vary depending on the approach chosen: they may represent whole words, subwords, characters, or even 
+            byte-pair encodings.
+        </p>
+        <p>
+            The main goal of tokenization is to simplify textual data so that it can be represented numerically for 
+            machine learning models. By doing so, raw text, which cannot be directly processed by models, becomes a 
+            structured input. This step ensures the model can learn relationships between words effectively.
+        </p>
+        <p>
+            <strong>Why Tokenization Matters</strong>
+            <br>Tokenization affects every subsequent step in the NLP pipeline. Proper tokenization ensures that important 
+            semantic and structural features of the input data are preserved, leading to better model performance. For 
+            example, tokenizing contractions like "can't" into "can" and "'t" can improve downstream processing.
+        </p>
+        <p>
+            Tokenization also helps in reducing vocabulary size and managing out-of-vocabulary tokens by adopting approaches 
+            like subword tokenization or Byte Pair Encoding (BPE), which we'll explore in the next chapter.
+        </p>
+    
+        <h2>4. Implementation of a Simple Tokenizer</h2>
+        <h3>4.1. Loading the Dataset</h3>
+        <pre><code class="language-python">
+    with open("verdict.txt", "r") as file:
+        raw_text = file.read()
+        </code></pre>
+    
+        <h3>4.2. Tokenizing the Text</h3>
+        <pre><code class="language-python">
+    import re
+    tokens = re.split(r'[\s,.;:?!]+', raw_text)
+        </code></pre>
+    
+        <h3>4.3. Creating the Vocabulary</h3>
+        <pre><code class="language-python">
+    unique_tokens = sorted(set(tokens))
+    vocab = {token: idx for idx, token in enumerate(unique_tokens)}
+        </code></pre>
+    
+        <h3>4.4. Mapping Tokens to Token IDs</h3>
+        <pre><code class="language-python">
+    token_ids = [vocab[token] for token in tokens if token in vocab]
+        </code></pre>
+    
+        <h2>5. Implementing the Tokenizer Class</h2>
+        <p>
+            To encapsulate the tokenization process, we create a Python class with methods to encode and decode text. 
+            This modular approach ensures reusability, testability, and easier maintenance. A well-structured tokenizer 
+            class simplifies downstream tasks like handling unknown tokens or adding special tokens for LLMs.
+        </p>
+        <pre><code class="language-python">
+    class Tokenizer:
+        def __init__(self, vocab):
+            self.vocab = vocab
+            self.reverse_vocab = {v: k for k, v in vocab.items()}
+        
+        def encode(self, text):
+            tokens = re.split(r'[\s,.;:?!]+', text)
+            token_ids = [self.vocab.get(token, self.vocab.get("[UNK]")) for token in tokens]
+            return token_ids
+    
+        def decode(self, token_ids):
+            tokens = [self.reverse_vocab[token_id] for token_id in token_ids]
+            return " ".join(tokens)
+        </code></pre>
+    
+        <h2>6. Handling Out-of-Vocabulary (OOV) Tokens</h2>
+        <p>
+            Out-of-vocabulary (OOV) words pose a significant challenge during tokenization. These are words that are 
+            not present in the predefined vocabulary. To address this, we introduce the <code>[UNK]</code> token, which 
+            acts as a placeholder for unknown words. This ensures that the tokenizer can handle a wide range of inputs, 
+            even if it doesn't understand every token.
+        </p>
+        <pre><code class="language-python">
+    class TokenizerWithOOV(Tokenizer):
+        def __init__(self, vocab):
+            super().__init__(vocab)
+            self.vocab["[UNK]"] = max(self.vocab.values()) + 1
+    
+        def encode(self, text):
+            tokens = re.split(r'[\s,.;:?!]+', text)
+            token_ids = [self.vocab.get(token, self.vocab["[UNK]"]) for token in tokens]
+            return token_ids
+        </code></pre>
+    
+        <h2>7. Special Tokens</h2>
+        <ul>
+            <li><strong>[UNK]</strong>: Represents unknown tokens not present in the vocabulary.</li>
+            <li><strong>[END]</strong>: Marks the end of a document or sentence.</li>
+        </ul>
+    
+        <h2>8. Handling Unknown Tokens and End-of-Text Tokens</h2>
+        <p>
+            To enhance the tokenizer, we introduce special tokens like <code>&lt;|unk|&gt;</code> and 
+            <code>&lt;|endoftext|&gt;</code>. These tokens improve the handling of unknown words and document boundaries, 
+            ensuring better compatibility with LLMs.
+        </p>
+        <pre><code class="language-python">
+    class EnhancedTokenizer:
+        def __init__(self, vocab):
+            self.vocab = vocab
+            self.reverse_vocab = {v: k for k, v in vocab.items()}
+            self.vocab["<|unk|>"] = len(vocab)
+            self.vocab["<|endoftext|>"] = len(vocab) + 1
+    
+        def encode(self, text):
+            tokens = re.split(r'[\s,.;:?!]+', text) + ["<|endoftext|>"]
+            token_ids = [self.vocab.get(token, self.vocab["<|unk|>"]) for token in tokens]
+            return token_ids
+    
+        def decode(self, token_ids):
+            tokens = [self.reverse_vocab.get(token_id, "<|unk|>") for token_id in token_ids]
+            return " ".join(tokens).replace(" <|endoftext|>", "")
+        </code></pre>
+    
+        <h2>9. Summary</h2>
+        <ul>
+            <li>Tokenization is the first step in building large language models (LLMs).</li>
+            <li>We learned to split text into tokens, create token IDs, and handle out-of-vocabulary words.</li>
+            <li>We implemented a complete Tokenizer class with encode and decode functions.</li>
+            <li>We introduced special tokens ([UNK], [END], [PAD], etc.).</li>
+        </ul>
+        <p>
+            This chapter provided a comprehensive understanding of tokenization and its role in building LLMs. 
+            In the next chapter, we will explore Byte Pair Encoding (BPE), the method used by GPT to handle subword 
+            tokenization. Stay tuned for more in-depth knowledge on how LLMs process and understand text.
+        </p>
+        <p><a class="btn btn-primary" href="P9-BuildingLLMs.html">Back</a></p>    
+    </div>
+    
+    
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-linkedin btn btn-link" href="https://linkedin.com/in/soroushmozooni" target="_blank">
+                <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
