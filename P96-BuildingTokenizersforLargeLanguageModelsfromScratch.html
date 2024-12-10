@@ -98,7 +98,7 @@
     </header>
 
     <div class="container">
-        <h1 class="mt-5">6: Building Tokenizers for Large Language Models</h1>
+        <h2 class="mt-5">6: Building Tokenizers for Large Language Models</h2>
     
         <p>
             Tokenization is one of the most crucial steps in building large language models (LLMs) from scratch. 
@@ -108,7 +108,7 @@
             used as inputs for machine learning models.
         </p>
     
-        <h2>1. Introduction</h2>
+        <h3>1. Introduction</h3>
         <p>
             In this chapter, we delve into the mechanics of tokenization, exploring concepts such as splitting text 
             into tokens, mapping tokens to unique token IDs, handling out-of-vocabulary (OOV) words, and using special 
@@ -117,7 +117,7 @@
             handle tokenization.
         </p>
     
-        <h2>2. Stages of Building Large Language Models</h2>
+        <h3>2. Stages of Building Large Language Models</h3>
         <ul>
             <li><strong>Stage 1: Data Preparation and Tokenization</strong>
                 <ul>
@@ -140,7 +140,7 @@
             </li>
         </ul>
     
-        <h2>3. Understanding Tokenization</h2>
+        <h3>3. Understanding Tokenization</h3>
         <p>
             Tokenization is a critical preprocessing step in working with textual data for machine learning. 
             It essentially transforms text into smaller, meaningful pieces called <em>tokens</em>. These tokens 
@@ -163,31 +163,31 @@
             like subword tokenization or Byte Pair Encoding (BPE), which we'll explore in the next chapter.
         </p>
     
-        <h2>4. Implementation of a Simple Tokenizer</h2>
-        <h3>4.1. Loading the Dataset</h3>
+        <h3>4. Implementation of a Simple Tokenizer</h3>
+        <h4>4.1. Loading the Dataset</h4>
         <pre><code class="language-python">
     with open("verdict.txt", "r") as file:
         raw_text = file.read()
         </code></pre>
     
-        <h3>4.2. Tokenizing the Text</h3>
+        <h4>4.2. Tokenizing the Text</h4>
         <pre><code class="language-python">
     import re
     tokens = re.split(r'[\s,.;:?!]+', raw_text)
         </code></pre>
     
-        <h3>4.3. Creating the Vocabulary</h3>
+        <h4>4.3. Creating the Vocabulary</h4>
         <pre><code class="language-python">
     unique_tokens = sorted(set(tokens))
     vocab = {token: idx for idx, token in enumerate(unique_tokens)}
         </code></pre>
     
-        <h3>4.4. Mapping Tokens to Token IDs</h3>
+        <h4>4.4. Mapping Tokens to Token IDs</h4>
         <pre><code class="language-python">
     token_ids = [vocab[token] for token in tokens if token in vocab]
         </code></pre>
     
-        <h2>5. Implementing the Tokenizer Class</h2>
+        <h3>5. Implementing the Tokenizer Class</h3>
         <p>
             To encapsulate the tokenization process, we create a Python class with methods to encode and decode text. 
             This modular approach ensures reusability, testability, and easier maintenance. A well-structured tokenizer 
@@ -209,7 +209,7 @@
             return " ".join(tokens)
         </code></pre>
     
-        <h2>6. Handling Out-of-Vocabulary (OOV) Tokens</h2>
+        <h3>6. Handling Out-of-Vocabulary (OOV) Tokens</h3>
         <p>
             Out-of-vocabulary (OOV) words pose a significant challenge during tokenization. These are words that are 
             not present in the predefined vocabulary. To address this, we introduce the <code>[UNK]</code> token, which 
@@ -228,13 +228,13 @@
             return token_ids
         </code></pre>
     
-        <h2>7. Special Tokens</h2>
+        <h3>7. Special Tokens</h3>
         <ul>
             <li><strong>[UNK]</strong>: Represents unknown tokens not present in the vocabulary.</li>
             <li><strong>[END]</strong>: Marks the end of a document or sentence.</li>
         </ul>
     
-        <h2>8. Handling Unknown Tokens and End-of-Text Tokens</h2>
+        <h3>8. Handling Unknown Tokens and End-of-Text Tokens</h3>
         <p>
             To enhance the tokenizer, we introduce special tokens like <code>&lt;|unk|&gt;</code> and 
             <code>&lt;|endoftext|&gt;</code>. These tokens improve the handling of unknown words and document boundaries, 
@@ -258,7 +258,7 @@
             return " ".join(tokens).replace(" <|endoftext|>", "")
         </code></pre>
     
-        <h2>9. Summary</h2>
+        <h3>9. Summary</h3>
         <ul>
             <li>Tokenization is the first step in building large language models (LLMs).</li>
             <li>We learned to split text into tokens, create token IDs, and handle out-of-vocabulary words.</li>
