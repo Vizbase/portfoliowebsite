@@ -4,222 +4,457 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
     <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
     <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+
     <style>
         .page-content {
-            padding-top: 100px; /* Increase padding to create space below the top bar */
+            padding-top: 100px;
         }
+
         .cc-porfolio-image {
             position: relative;
             overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            background-color: #f8f9fa; /* Light background color */
-            border: 2px solid #4CAF50; /* Green border for accent */
+            background-color: #f8f9fa;
+            border: 2px solid #4CAF50;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center; /* Center titles below the images */
-            height: 300px; /* Enforce consistent card height */
+            text-align: center;
+            height: 300px;
         }
+
         .cc-porfolio-image img {
             width: 100%;
-            height: 80%; /* Ensure image doesn't cover the entire card */
-            object-fit: cover; /* Maintain image proportions */
+            height: 80%;
+            object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
         }
+
         .cc-porfolio-image:hover img {
             transform: scale(1.1);
         }
+
         .cc-porfolio-image:hover {
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
             transform: scale(1.02);
         }
+
         .cc-porfolio-image .title {
-            height: 20%; /* Reserve space for the project name */
+            height: 20%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0; /* Remove unnecessary margins */
+            margin: 0;
             font-size: 18px;
             font-weight: normal;
-            color: #000; /* Black color for the project title */
-            background-color: #fff; /* Ensure readability against light background */
-            border-top: 1px solid #4CAF50; /* Add a separator line for clarity */
+            color: #000;
+            background-color: #fff;
+            border-top: 1px solid #4CAF50;
         }
     </style>
-    
 </head>
+
 <body id="top">
+
     <header>
         <div class="profile-page sidebar-collapse">
-            <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #4CAF50; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+            <nav class="navbar navbar-expand-lg fixed-top"
+                 style="background-color: #4CAF50; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+
                 <div class="container">
-                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <button class="navbar-toggler navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navigation"
+                            aria-controls="navigation"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+
                         <span class="navbar-toggler-bar bar1"></span>
                         <span class="navbar-toggler-bar bar2"></span>
                         <span class="navbar-toggler-bar bar3"></span>
+
                     </button>
+
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
                         <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link smooth-scroll" style="color: white;" href="index.html#about">About</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" style="color: white;" href="index.html#skill">Skills</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" style="color: white;" href="index.html#portfolio">Portfolio</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" style="color: white;" href="index.html#experience">Experience</a></li>
-                            <li class="nav-item"><a class="nav-link smooth-scroll" style="color: white;" href="index.html#contact">Contact</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link smooth-scroll"
+                                   style="color: white;"
+                                   href="index.html#about">About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link smooth-scroll"
+                                   style="color: white;"
+                                   href="index.html#skill">Skills</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link smooth-scroll"
+                                   style="color: white;"
+                                   href="index.html#portfolio">Portfolio</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link smooth-scroll"
+                                   style="color: white;"
+                                   href="index.html#experience">Experience</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link smooth-scroll"
+                                   style="color: white;"
+                                   href="index.html#contact">Contact</a>
+                            </li>
                         </ul>
+
                     </div>
                 </div>
             </nav>
         </div>
     </header>
 
+
     <div class="page-content">
         <div class="container">
+
             <h2 class="mt-5 text-center">Portfolio Projects</h2>
+
+
+            <!-- Row 1 -->
             <div class="row">
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P14-GenAI-OCR-Intelligent Receipt Processor.html">
-                            <img src="images/OCR.png" alt="GenAI-OCR: Intelligent Receipt Processor">
+                            <img src="images/OCR.png"
+                                 alt="GenAI-OCR: Intelligent Receipt Processor">
                         </a>
-                        <div class="title">GenAI-OCR: Intelligent Receipt Processor</div>
+
+                        <div class="title">
+                            GenAI-OCR: Intelligent Receipt Processor
+                        </div>
+
                     </div>
-                </div> 
+                </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P13-RAGTechnicalChatbot.html">
-                            <img src="images/RAGChatbotforTechnicalDocumentation.png" alt="RAG Chatbot for Technical Documentation">
+                            <img src="images/RAGChatbotforTechnicalDocumentation.png"
+                                 alt="RAG Chatbot for Technical Documentation">
                         </a>
-                        <div class="title">RAG Chatbot for Technical Documentation</div>
+
+                        <div class="title">
+                            RAG Chatbot for Technical Documentation
+                        </div>
+
                     </div>
-                </div>                
+                </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P12-AIethics.html">
-                            <img src="images/AIethics.png" alt="AI Ethics">
+                            <img src="images/AIethics.png"
+                                 alt="AI Ethics">
                         </a>
-                        <div class="title">AI Ethics: Navigating the Future Responsibly</div>
+
+                        <div class="title">
+                            AI Ethics: Navigating the Future Responsibly
+                        </div>
+
                     </div>
                 </div>
-            </div>           
+
+            </div>
+
+
+            <!-- Row 2 -->
             <div class="row">
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P11-YouTubeTranscriptSummarizer.html">
-                            <img src="images/youtubevideosummerizer.png" alt="YouTube Transcript Summarizer">
+                            <img src="images/youtubevideosummerizer.png"
+                                 alt="YouTube Transcript Summarizer">
                         </a>
-                        <div class="title">YouTube Video Summarizer</div>
+
+                        <div class="title">
+                            YouTube Video Summarizer
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P10-GenAI-ColdEmail.Generator.html">
-                            <img src="images/ColdEmail.png" alt="GenAI: Cold Email Generator">
+                            <img src="images/ColdEmail.png"
+                                 alt="GenAI: Cold Email Generator">
                         </a>
-                        <div class="title">GenAI: Cold Email Generator</div>
+
+                        <div class="title">
+                            GenAI: Cold Email Generator
+                        </div>
+
                     </div>
-                </div> 
+                </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P9-BuildingLLMs.html">
-                            <img src="images/llmdoc.png" alt="Exploring Large Language Models">
+                            <img src="images/llmdoc.png"
+                                 alt="Exploring Large Language Models">
                         </a>
-                        <div class="title">Building LLMs from Scratch: A Personal Explorations</div>
+
+                        <div class="title">
+                            Building LLMs from Scratch: A Personal Explorations
+                        </div>
+
                     </div>
                 </div>
+
             </div>
+
+
+            <!-- Row 3 -->
             <div class="row">
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P7-EquityAnalysis.html">
-                            <img src="images/EquityAnalysis.png" alt="Time Series Prediction Models">
+                            <img src="images/EquityAnalysis.png"
+                                 alt="Time Series Prediction Models">
                         </a>
-                        <div class="title">Financial Analysis and Time Series Modeling using LLMs</div>
+
+                        <div class="title">
+                            Financial Analysis and Time Series Modeling using LLMs
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P6-ElectricVehicles.html">
-                            <img src="images/ElectronicVehicle.jpg" alt="Electric Vehicle Data Analysis">
+                            <img src="images/ElectronicVehicle.jpg"
+                                 alt="Electric Vehicle Data Analysis">
                         </a>
-                        <div class="title">Electric Vehicle Data Analysis - Tableau</div>
+
+                        <div class="title">
+                            Electric Vehicle Data Analysis - Tableau
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P5-seminar paper.html">
-                            <img src="images/story.png" alt="Storytelling and Business Analytics">
+                            <img src="images/story.png"
+                                 alt="Storytelling and Business Analytics">
                         </a>
-                        <div class="title">Storytelling, Business Analytics, and Big Data Interpretation</div>
+
+                        <div class="title">
+                            Storytelling, Business Analytics, and Big Data Interpretation
+                        </div>
+
                     </div>
                 </div>
+
             </div>
+
+
+            <!-- Row 4 -->
             <div class="row">
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P4-CovidAnalysis.html">
-                            <img src="images/covidanalysis.jpg" alt="COVID-19 Data Analysis Using Python">
+                            <img src="images/covidanalysis.jpg"
+                                 alt="COVID-19 Data Analysis Using Python">
                         </a>
-                        <div class="title">COVID-19 Data Analysis</div>
+
+                        <div class="title">
+                            COVID-19 Data Analysis
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P3-BritishAirways.html">
-                            <img src="images/BritishAirways.png" alt="British Airways - Tableau">
+                            <img src="images/BritishAirways.png"
+                                 alt="British Airways - Tableau">
                         </a>
-                        <div class="title">British Airways - Tableau</div>
+
+                        <div class="title">
+                            British Airways - Tableau
+                        </div>
+
                     </div>
                 </div>
+
+
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
                         <a href="P2-OnlineRetail.html">
-                            <img src="images/OnlineRetail.jpg" alt="Online Retail">
+                            <img src="images/OnlineRetail.jpg"
+                                 alt="Online Retail">
                         </a>
-                        <div class="title">Online Retail: Advanced EDA and RFM Segmentation with Python</div>
+
+                        <div class="title">
+                            Online Retail: Advanced EDA and RFM Segmentation with Python
+                        </div>
+
                     </div>
                 </div>
+
             </div>
+
+
+            <!-- Row 5 -->
             <div class="row">
+
+                <!-- Multi-Sport Project -->
                 <div class="col-md-4">
-                    <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                        <a href="P1-DataCleaningSQL.html">
-                            <img src="images/sqlcleaning.jpg" alt="Data Cleaning Using SQL">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
+                        <a href="P15-Multi-Sport-League-Results-and-Statistics-Platform.html">
+                            <img src="images/sport_league.png"
+                                 alt="Multi-Sport League Results and Statistics Platform">
                         </a>
-                        <div class="title">Data Cleaning Using SQL</div>
+
+                        <div class="title">
+                            Multi-Sport League Results and Statistics Platform
+                        </div>
+
                     </div>
                 </div>
+
+
+                <!-- SQL Project -->
+                <div class="col-md-4">
+                    <div class="cc-porfolio-image img-raised"
+                         data-aos="fade-up"
+                         data-aos-anchor-placement="top-bottom">
+
+                        <a href="P1-DataCleaningSQL.html">
+                            <img src="images/sqlcleaning.jpg"
+                                 alt="Data Cleaning Using SQL">
+                        </a>
+
+                        <div class="title">
+                            Data Cleaning Using SQL
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </div>
 
+
     <footer class="footer">
+
         <div class="container text-center">
-            <a class="cc-linkedin btn btn-link" href="https://linkedin.com/in/soroushmozooni" target="_blank">
+
+            <a class="cc-linkedin btn btn-link"
+               href="https://linkedin.com/in/soroushmozooni"
+               target="_blank">
                 <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
             </a>
-            <a class="cc-github btn btn-link" href="https://github.com/Vizbase target="_blank">
+
+            <a class="cc-github btn btn-link"
+               href="https://github.com/Vizbase"
+               target="_blank">
                 <i class="fa fa-github fa-2x" aria-hidden="true"></i>
             </a>
-            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+
+            <a class="cc-instagram btn btn-link"
+               href="https://instagram.com/vizbase"
+               target="_blank">
                 <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
             </a>
-            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+
+            <a class="cc-email btn btn-link"
+               href="mailto:mozooni.soroush@gmail.com">
                 <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
             </a>
+
         </div>
-        <div class="h4 title text-center">Soroush Mozooni</div>
+
+        <div class="h4 title text-center">
+            Soroush Mozooni
+        </div>
+
     </footer>
+
+
     <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
     <script src="js/core/popper.min.js?ver=1.1.0"></script>
     <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
     <script src="js/now-ui-kit.js?ver=1.1.0"></script>
     <script src="js/aos.js?ver=1.1.0"></script>
+
     <script>
         AOS.init({
             duration: 800,
@@ -227,5 +462,6 @@
             once: true
         });
     </script>
+
 </body>
 </html>
