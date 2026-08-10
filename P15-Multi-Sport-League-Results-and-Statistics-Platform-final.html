@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50; /* Green background */
+            position: fixed; /* Fix position */
+            top: 0; /* Align to top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White text */
+        }
+        .navbar-toggler-bar {
+            background: #fff !important; /* White lines on toggler */
+        }
+        body {
+            padding-top: 70px; /* Offset for the fixed navbar */
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="mt-5">Multi-Sport League Results and Statistics Platform</h2>
+
+        <h3>Project Overview</h3>
+        <p>The Multi-Sport League Results and Statistics Platform was developed to automatically collect, process, and display sports information from multiple online sources in one web application. The platform covered several sports, including <strong>football, volleyball, basketball, and futsal</strong>, and handled data such as fixtures, scores, league standings, rankings, teams, and historical match information.</p>
+
+        <p>Sports data was collected from different Iranian and international sources, including websites such as <strong>Varzesh3, IRNA, ISNA</strong>, and other league or sports-result websites. Since each source had a different HTML structure and data format, the application used <strong>source-specific Python scraping components</strong> to extract the required information. The collected data was then cleaned, normalized, validated, and converted into a consistent format before being stored and used by the Django application.</p>
+
+        <h3>Data Collection and Processing</h3>
+        <p>The main workflow of the system was:</p>
+        <p><strong>Sports Websites &rarr; Python Scrapers &rarr; Data Cleaning &amp; Validation &rarr; Relational Database &rarr; Django Backend &rarr; Web Dashboard</strong></p>
+
+        <p>The scraping components extracted information such as team names, competitions, match status, scores, standings, and rankings from HTML pages. After extraction, the processing layer standardized fields coming from different sources so that the rest of the application could work with one common data structure.</p>
+
+        <p>The system also handled <strong>duplicate detection and record updates</strong>. When a fixture or match already existed in the database, the existing record could be updated instead of creating another entry. This was useful for information that changed over time, such as match status, final scores, or league standings.</p>
+
+        <p>The data collection process was scheduled to run automatically, allowing the application to periodically check the configured websites for new or updated information without requiring manual data entry.</p>
+
+        <h3>Backend and Data Structure</h3>
+        <p>The backend was developed using <strong>Django</strong> and the <strong>Django ORM</strong> to organize, store, and query the collected information. A relational data structure connected the main entities of the application:</p>
+
+        <p><strong>Sport &rarr; League / Competition &rarr; Teams &rarr; Matches &rarr; Results / Statistics</strong></p>
+
+        <p>This structure allowed different sports and competitions to use the same general backend while keeping their records organized separately. The database stored both current and previous match information, making it possible to retrieve recent results as well as historical data. Django queries were used to filter information based on sport, league, team, competition, and match data.</p>
+
+        <h3>Web Dashboard</h3>
+        <p>A Django-based web dashboard was built on top of the collected data so users could explore sports information through one interface instead of visiting several source websites separately.</p>
+
+        <p>The dashboard allowed users to view and filter:</p>
+        <ul>
+            <li>Fixtures and match results</li>
+            <li>League standings</li>
+            <li>Team rankings</li>
+            <li>Team information</li>
+            <li>Historical results</li>
+            <li>Sports, leagues, competitions, and teams</li>
+        </ul>
+
+        <p>By separating the scraping, data processing, database, and web interface into different parts of the application, additional sports or data sources could be added without redesigning the complete system.</p>
+
+        <h3>Reliability and Error Handling</h3>
+        <p>Because the platform depended on external websites, the scraping process also needed to handle incomplete data, failed requests, and temporary changes in source pages. Error handling was added around the collection process so that a problem with one source did not necessarily stop the processing of other websites.</p>
+
+        <p>The application included logic for:</p>
+        <ul>
+            <li>Duplicate detection and existing record updates</li>
+            <li>Data validation and normalization</li>
+            <li>Missing-field handling</li>
+            <li>Failed page requests</li>
+            <li>Unexpected HTML structures</li>
+            <li>Exception handling during scraping</li>
+            <li>Scheduled data updates</li>
+        </ul>
+
+        <h3>Technologies &amp; Techniques</h3>
+        <ul>
+            <li><strong>Python:</strong> Used for web scraping, data processing, validation, and automation.</li>
+            <li><strong>Django:</strong> Used to build the backend and web application.</li>
+            <li><strong>Django ORM:</strong> Used to manage relational data and query sports records.</li>
+            <li><strong>Web Scraping &amp; HTML Parsing:</strong> Used to extract structured sports information from different websites.</li>
+            <li><strong>Relational Database:</strong> Used to store sports, leagues, teams, matches, results, and historical records.</li>
+            <li><strong>Data Cleaning &amp; Normalization:</strong> Used to convert different source formats into one consistent structure.</li>
+            <li><strong>Scheduled Data Collection:</strong> Used to automatically refresh fixtures, results, and standings.</li>
+            <li><strong>Duplicate Detection &amp; Error Handling:</strong> Used to maintain consistent records and improve scraping reliability.</li>
+        </ul>
+
+        <h3>Conclusion</h3>
+        <p>This project combined <strong>web scraping, automated data processing, relational data management, and Django web development</strong> in one end-to-end application. The main technical challenge was bringing information from multiple websites and different sports into a common data structure that could be searched, filtered, and displayed through one dashboard.</p>
+
+        <p><a class="btn btn-primary" href="projects.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+</body>
+</html>
