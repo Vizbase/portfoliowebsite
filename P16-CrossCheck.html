@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cross-Check: A Cross-System CRM Data Quality Tool | Soroush Mozooni</title>
+    <meta name="description" content="An internal tool that compares Salesforce and a marketing platform, finds records costing a sales team money, and proposes fixes that a human approves before anything is written.">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?ver=1.1.0" rel="stylesheet">
+    <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <noscript>
+      <style type="text/css">
+        [data-aos] {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+      </style>
+    </noscript>
+    <style>
+        .navbar {
+            background-color: #4CAF50;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important;
+        }
+        .navbar-toggler-bar {
+            background: #fff !important;
+        }
+        body {
+            padding-top: 70px;
+        }
+        .project-figure {
+            margin: 28px auto;
+            max-width: 560px;
+            text-align: center;
+        }
+        .project-figure img {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            border: 1px solid #e4e4e4;
+            border-radius: 4px;
+        }
+        .project-figure figcaption {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+            text-align: center;
+        }
+        .figure-pair {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 28px 0;
+        }
+        .figure-pair figure {
+            flex: 1 1 300px;
+            max-width: 360px;
+            margin: 0;
+        }
+        .figure-pair img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e4e4e4;
+            border-radius: 4px;
+        }
+        .figure-pair figcaption {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+            text-align: center;
+        }
+        .container table {
+            width: 100%;
+            margin: 20px 0 30px 0;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .container table th,
+        .container table td {
+            border: 1px solid #e4e4e4;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .container table th {
+            background-color: #f6f6f6;
+            font-weight: 700;
+        }
+        blockquote.note {
+            border-left: 4px solid #4CAF50;
+            padding: 8px 0 8px 18px;
+            margin: 25px 0;
+            color: #444;
+            font-size: 1.05rem;
+        }
+        pre.terminal {
+            background-color: #f6f6f6;
+            border: 1px solid #e4e4e4;
+            border-radius: 4px;
+            padding: 15px;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+        .project-figure img,
+        .figure-pair img {
+            cursor: zoom-in;
+            transition: border-color 0.2s;
+        }
+        .project-figure img:hover,
+        .figure-pair img:hover {
+            border-color: #4CAF50;
+        }
+        .zoom-hint {
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+            margin: 20px 0 0 0;
+        }
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 2000;
+            cursor: zoom-out;
+            text-align: center;
+        }
+        #lightbox.open {
+            display: block;
+        }
+        #lightbox img {
+            max-width: 94%;
+            max-height: 88%;
+            margin-top: 3vh;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            cursor: default;
+        }
+        #lightbox-caption {
+            color: #ddd;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            padding: 0 20px;
+            font-style: italic;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 26px;
+            color: #fff;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            opacity: 0.75;
+        }
+        #lightbox-close:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="profile-page sidebar-collapse">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#about">About</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#skill">Skills</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#experience">Experience</a></li>
+                            <li class="nav-item"><a class="nav-link smooth-scroll" href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="mt-5">Cross-Check: A Cross-System CRM Data Quality Tool</h2>
+
+        <h3>Why This Problem Exists</h3>
+        <p>A modern company does not keep its customer information in one place. It is spread across many tools. Sales works in a CRM such as <strong>Salesforce</strong> or HubSpot. Marketing works in a platform such as <strong>Marketo</strong>, Pardot or HubSpot Marketing. Support works in Zendesk or Intercom. Finance works in a billing system. Meetings come from Calendly, calls from Aircall, contracts from DocuSign.</p>
+
+        <p>Each of these tools holds a copy of the same customer. They are connected by syncs and integrations that run in the background, and those syncs fail quietly. A field does not copy across. A record is created in one system and never arrives in the other. A value is updated in one place and stays old everywhere else.</p>
+
+        <p>Nobody notices, because <strong>each system looks correct when you open it on its own.</strong> The mistake only becomes visible when you compare two systems side by side, and almost nobody does that. There is no screen anywhere that shows both.</p>
+
+        <p><strong>The cost is real and it is quiet:</strong></p>
+        <ul>
+            <li>A new lead arrives and no salesperson is assigned to it, so nobody calls, and the buyer talks to a competitor instead.</li>
+            <li>The same company sits in the CRM twice, so two salespeople contact the same customer and the company looks disorganised.</li>
+            <li>A report is built from one system, and a different report from the other, and the two numbers do not match. Now nobody trusts either.</li>
+            <li>A person fills in a form on the website and is never created in the CRM, so marketing believes sales is working the lead, and sales does not know the person exists.</li>
+        </ul>
+
+        <p>These are not rare problems. They are the normal condition of any company with more than one tool. Most teams deal with them by having someone export both systems to a spreadsheet every few weeks and compare them by hand, which is slow, boring, and stops the moment that person is busy or leaves.</p>
+
+        <p><strong>Cross-Check is my attempt to automate that comparison with AI</strong> &mdash; but carefully, because an AI tool that writes wrong data into a CRM is worse than no tool at all.</p>
+
+        <h3>Project Overview</h3>
+        <p><strong>Cross-Check</strong> is an internal web application that looks at two business systems at the same time, finds records that are quietly costing a sales team money, and uses an LLM to propose a fix for each one with the evidence behind it. A person reviews every proposal. Nothing is written to the CRM until a human approves it.</p>
+
+        <p>The two systems are <strong>Salesforce</strong> and a <strong>marketing platform</strong>. In this project the marketing platform is a Google Sheet that plays the role of a tool like Marketo. The sync problems between the two systems are modelled realistically. The vendor is not.</p>
+
+        <blockquote class="note">Rules find what rules can find. An LLM decides only what rules genuinely cannot decide. Nothing reaches the CRM without a person approving it.</blockquote>
+
+        <p>All the data is <strong>synthetic</strong>, generated with a fixed random seed so anyone can reproduce it. This means I can talk about accuracy and behaviour, but I make no claim about hours saved or revenue recovered. Those numbers would not be honest on invented data.</p>
+
+        
+
+        <figure class="project-figure">
+            <img src="images/crosscheck-01-queue.png" alt="Cross-Check review queue showing 95 issues found and nothing written">
+            <figcaption>The review queue after one scan. Ninety-five issues found, nothing written yet.</figcaption>
+        </figure>
+
+        <h3>The Problem</h3>
+        <p>Nobody in a sales team ever complains that a domain name is formatted incorrectly. They complain that a deal was lost and nobody found out for three weeks.</p>
+
+        <p>That difference shaped the whole project. Every check comes from a real complaint that revenue operations people describe, not from an idea of what &ldquo;clean data&rdquo; should look like.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>What the record looks like</th>
+                    <th>What it costs the business</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A lead arrives with no country, so routing cannot assign it to anyone</td>
+                    <td>Nobody owns it. It sits in a queue and nobody calls.</td>
+                </tr>
+                <tr>
+                    <td>The same company exists twice in the CRM</td>
+                    <td>Two salespeople call the same customer.</td>
+                </tr>
+                <tr>
+                    <td>Salesforce and the marketing platform hold different values for the same person</td>
+                    <td>Any report gives a different answer depending on which system you ask.</td>
+                </tr>
+                <tr>
+                    <td>A person exists in marketing but never reached the CRM</td>
+                    <td>Marketing thinks sales is working the lead. Sales does not know they exist.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>These four are the four shapes a data problem can take: <strong>too many</strong> records, <strong>too few</strong>, <strong>incomplete</strong>, and <strong>contradictory</strong>.</p>
+
+        <p>Because of this, the review screen is grouped by <strong>what the problem costs</strong>, not by the type of technical error. The sections are called <em>Stuck</em>, <em>Duplicated</em>, <em>Conflicting</em> and <em>Missing</em>. An alert that says &ldquo;nobody owns these&rdquo; gets acted on. An alert that says &ldquo;field Country is null&rdquo; does not.</p>
+
+        <p>Here is the disagreement problem in practice. The same person in two systems at the same moment:</p>
+
+        <div class="figure-pair">
+            <figure>
+                <img src="images/crosscheck-02a-salesforce.png" alt="Salesforce contact record showing lifecycle stage customer">
+                <figcaption>Salesforce says <code>customer</code>.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/crosscheck-02b-marketing.png" alt="Marketing platform row showing lifecycle stage sql for the same person">
+                <figcaption>Marketing says <code>sql</code>.</figcaption>
+            </figure>
+        </div>
+
+        <p>One system believes she already bought something. The other is still prospecting her. Both cannot be right, and nobody looking at only one system would notice.</p>
+
+        <h3>How the System Works</h3>
+        <p><strong>Salesforce + Marketing platform &rarr; Deterministic checks &rarr; LLM adjudication (only where needed) &rarr; Validation gates &rarr; Proposal queue &rarr; Human review &rarr; Write-back + Audit log + Slack digest</strong></p>
+
+        <figure class="project-figure">
+            <img src="images/crosscheck-architecture.png" alt="Cross-Check system architecture diagram">
+            <figcaption>Teal is decided by rules, purple by the AI, coral by a human, grey is structure.</figcaption>
+        </figure>
+
+        <p>The colours answer one question: <strong>who decided this?</strong> The purple area is deliberately small. The LLM touches one step of the pipeline, and its output is a proposal, not an action.</p>
+
+        <p>This is not an autonomous agent, and that is on purpose. A better description is <strong>LLM-in-the-loop automation</strong>. The failure mode of a bad CRM write is silent &mdash; nothing breaks, no error appears, and a report looks wrong six weeks later when nobody can tell which records to distrust. A system writing into a business system of record is the wrong place to spend autonomy.</p>
+
+        <h4>Five rules fixed before any code was written</h4>
+        <ol>
+            <li><strong>Deterministic before probabilistic, always.</strong> No AI tokens spent on a problem a rule can solve.</li>
+            <li><strong>The LLM never writes.</strong> No path in the code goes from AI output to a CRM change without human approval.</li>
+            <li><strong>Dry run is the default state of the code</strong>, not a mode you remember to switch on.</li>
+            <li><strong>The schema is read at runtime</strong> from Salesforce itself. A renamed field produces a clear error instead of a wrong write.</li>
+            <li><strong>Escalation is a correct answer.</strong> The prompt tells the LLM that saying &ldquo;I cannot decide this&rdquo; is right when evidence is thin.</li>
+        </ol>
+
+        <blockquote class="note">A system that is 95% accurate and never says &ldquo;I&rsquo;m not sure&rdquo; is more dangerous than one at 88% that escalates cleanly.</blockquote>
+
+        <h3>The Data</h3>
+        <p>Real company data would not work, because I would have no way to check whether the system was right. So <code>scripts/generate_data.py</code> creates the whole dataset from a fixed seed. It produces <strong>481 Salesforce records</strong>, <strong>155 marketing rows</strong>, and <strong>154 deliberate defects</strong> across 12 types.</p>
+
+        <p>It also writes <code>data/defects.json</code> &mdash; the <strong>answer key</strong>, recording which record carries which defect and what the correct resolution is. Everything I later measure is measured against this file.</p>
+
+        <p>The generator also checks its own work and refuses to save if the data and the manifest disagree. This mattered: at one point the manifest recorded ten phone conflicts while the data had no phone column at all. A test fixture that disagrees with its own answer key is worse than having no answer key, because it produces confident wrong measurements instead of no measurement.</p>
+
+        <h3>The Main Scripts</h3>
+        <p>This project includes different Python scripts and files. These are the parts that matter.</p>
+
+        <p><strong><code>checks/</code></strong> contains all detection logic, using plain rules only. No LLM is called at this stage, which is why detection costs nothing.</p>
+        <ul>
+            <li><strong><code>stuck.py</code></strong> finds leads owned by a queue instead of a person. When a lead has no country, routing cannot decide who should get it. The check reads the email domain ending (<code>.de</code>, <code>.it</code>, <code>.nl</code>) and maps it to a country. All 18 of these are solved by that one rule.</li>
+            <li><strong><code>crosssystem.py</code></strong> compares the two systems record by record. It contains an important decision: some fields have a clear owner. Lifecycle stage belongs to the CRM, because that is where deals are worked &mdash; so when the systems disagree, the rule decides immediately and the marketing platform is corrected upstream. Phone numbers are different. Nobody owns a phone number, so those cases go to the LLM.</li>
+            <li><strong><code>duplicate.py</code></strong> finds accounts that might be the same company, in three stages. The middle one is the most interesting part of the project, described below.</li>
+        </ul>
+
+        <p><strong><code>adjudicator.py</code></strong> is the only file that talks to the LLM, and it holds the validation gates. <strong><code>llm.py</code></strong> handles the API call itself &mdash; JSON mode, temperature 0, request pacing, and graceful behaviour when quota runs out.</p>
+
+        <p><strong><code>scan.py</code></strong> runs the checks, sends only ambiguous cases to the adjudicator, and fills the queue. <strong><code>db.py</code></strong> holds the proposals, the audit log, and an <strong>idempotency key</strong> per issue so running a scan twice never creates the same proposal twice.</p>
+
+        <p><strong><code>app.py</code></strong> is the Streamlit review screen. <strong><code>writer.py</code></strong> is the only file in the project that changes anything in Salesforce. <strong><code>slack_client.py</code></strong> sends one summary per batch. <strong><code>eval/</code></strong> builds and runs the 29-case test set used to compare prompt versions.</p>
+
+        <h3>The Detection Finding I Did Not Expect</h3>
+        <p>Four duplicate pairs were deliberately placed in the data. One almost escaped detection completely.</p>
+
+        <p><strong>Nordvik Retail AB</strong> and <strong>Nordvik Logistics AB</strong> are different companies sharing a registered address in Stockholm. By name they score <strong>67 out of 100</strong> on similarity. The problem is that unrelated companies score the same.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Pair</th>
+                    <th>Similarity</th>
+                    <th>Real duplicate?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Meridian Freight B.V. / Meridian Freight Ltd</td><td>100</td><td>Yes</td></tr>
+                <tr><td><strong>Nordvik Retail AB / Nordvik Logistics AB</strong></td><td><strong>67</strong></td><td><strong>Yes</strong></td></tr>
+                <tr><td>Kestrel Digital GmbH / Kestrel Trading AG</td><td>73</td><td>No</td></tr>
+                <tr><td>Nordvik Retail AB / Nordvik Partners AG</td><td>67</td><td>No</td></tr>
+            </tbody>
+        </table>
+
+        <p>The obvious fix is to lower the threshold until the real pair is caught. But at 67 there is a real pair and a false pair with the same score. <strong>No threshold separates them, because the score carries no information at that range.</strong> Lowering it would flood the queue with every pair of companies sharing part of a name.</p>
+
+        <p>So instead of loosening the existing test, I added a different one: <strong>identical registered address.</strong> That single stage found exactly <strong>3 collisions across 120 accounts</strong> &mdash; precisely the 3 pairs I had scripted, with zero false positives.</p>
+
+        <blockquote class="note">Precision came from adding a different <em>kind</em> of evidence, not from loosening the existing kind.</blockquote>
+
+        <p>A shared address is never a reason to merge two companies &mdash; corporate groups register subsidiaries at one address all the time. But it is a reason to <strong>look</strong>, and looking is what allows the next stage to refuse on the registration numbers.</p>
+
+        <h3>Same Check, Opposite Answers</h3>
+        <p>Every deduplication tool demonstrates itself by merging records. Almost none demonstrates a <strong>refusal</strong> &mdash; looking at two records that appear identical and saying <em>no, these are different companies, and here is how I know.</em></p>
+
+        <p>That is the harder case. Merging two different legal entities in Salesforce moves their contacts, opportunities and cases together, applies survivorship rules field by field, and <strong>cannot be undone.</strong></p>
+
+        <p>Each scripted pair is decided by a different kind of evidence, so a model that learned one rule cannot get all four right:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Pair</th>
+                    <th>Decision</th>
+                    <th>Why</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Meridian Freight B.V. | Meridian Freight Ltd</td><td><strong>Refuse</strong></td><td>NL-KVK-51209834 against UK-CRN-09183422 &mdash; two countries</td></tr>
+                <tr><td>Nordvik Retail AB | Nordvik Logistics AB</td><td><strong>Refuse</strong></td><td>Same country, same address, different registration numbers</td></tr>
+                <tr><td>Kestrel Digital GmbH | Kestrel Digital</td><td><strong>Merge</strong></td><td>Identical registration number DE-HRB-118422</td></tr>
+                <tr><td>Halden Retail | Halden Retail Group B.V.</td><td><strong>Merge</strong></td><td>Same domain and address, one record almost empty</td></tr>
+            </tbody>
+        </table>
+
+        <figure class="project-figure">
+            <img src="images/crosscheck-03-opposite-verdicts.png" alt="Kestrel merged and Nordvik refused in the same review queue">
+            <figcaption>The same check, two opposite answers, each naming the identifier that decided it.</figcaption>
+        </figure>
+
+        <p>The system also correctly refused pairs that were never meant to be test cases &mdash; randomly generated companies that happened to look similar by accident. One was a <strong>second Nordvik pair</strong>, <em>Partners Sp. z o.o.</em> against <em>Partners AG</em>, refused because one is Polish and the other German.</p>
+
+        <p>So two Nordvik decisions now sit in the same queue. Same name stem, both scoring 67, one placed by me and one that appeared by chance, both handled correctly.</p>
+
+        <blockquote class="note">Handling cases nobody anticipated is stronger evidence than passing tests you wrote yourself.</blockquote>
+
+        <h3>Where the LLM Fits, and Where It Does Not</h3>
+        <p>The LLM answers one question in structured JSON: <em>given this evidence, what should happen to this record?</em> It chooses one of five actions.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>update_fields</code></td><td>Change a field. The only action that touches a record.</td></tr>
+                <tr><td><code>merge</code></td><td>Same company, but a person must perform the merge.</td></tr>
+                <tr><td><code>create_crm_record</code></td><td>Should exist in the CRM, but a person must create it.</td></tr>
+                <tr><td><code>no_action</code></td><td>I am confident the right answer is to change nothing.</td></tr>
+                <tr><td><code>escalate</code></td><td>The evidence is not decisive. A person should look.</td></tr>
+            </tbody>
+        </table>
+
+        <p>The last two are opposite outcomes and must never share a word. <code>no_action</code> at 0.98 confidence means the system was sure. <code>escalate</code> means it was not.</p>
+
+        <figure class="project-figure">
+            <img src="images/crosscheck-04-rules-vs-llm.png" alt="Refusals decided by rules next to escalations decided by the LLM">
+            <figcaption>The grey line under each card shows what decided it: <code>rules &middot; confidence 0.88</code> or <code>llm &middot; confidence 0.85 &middot; gemini-3.5-flash</code>.</figcaption>
+        </figure>
+
+        <p>That small line is the architecture made visible. You can see which decisions cost a token and which did not, without reading any code.</p>
+
+        <h4>Four validation gates</h4>
+        <p>Every LLM response is checked before it can become a proposal: it must parse against the expected schema, the action must be one of the five permitted ones, every field it names must exist in Salesforce according to the live schema, and confidence must be between 0 and 1.</p>
+
+        <p>A fifth rule covers actions that decide something <em>without</em> editing a field. <code>merge</code>, <code>no_action</code>, <code>escalate</code> and <code>create_crm_record</code> must carry no field changes. If any gate fails, the item goes to a human. It is never written and never silently passed.</p>
+
+        <p><strong>These gates are not decoration, and I have a logged case that proves it.</strong> During my first evaluation, the LLM returned a well-reasoned <code>merge</code> at 0.95 confidence &mdash; and attached a field edit to it, trying to rename the account as part of the merge. The gate rejected it:</p>
+
+        <pre class="terminal">Response rejected by validation: merge must not carry proposed_changes (got 1)</pre>
+
+        <p>I fixed it in <strong>two</strong> places, and this is the principle I took from it:</p>
+
+        <blockquote class="note">Prompt guidance is a request. A validation gate is a guarantee.</blockquote>
+
+        <p>I corrected the prompt so the LLM would stop doing it, <strong>and</strong> kept the gate so that if a future model does it again, nothing gets through. A perfect score only shows the LLM was not wrong that day. It says nothing about what happens when it is.</p>
+
+        <h3>What the System Refuses to Do</h3>
+        <p>Two actions are decided but deliberately not performed, no matter how confident the AI is.</p>
+
+        <p><strong>Merging accounts</strong> moves contacts, opportunities and cases to a new parent, applies survivorship rules per field, and cannot be undone. A reviewer would want to control that in the CRM anyway.</p>
+
+        <p><strong>Creating a contact</strong> needs two things the marketing data does not contain: which account it belongs to, and who owns it. A contact with no account appears on no account page and is reached by no territory rule. One with the wrong owner silently misroutes the lead and corrupts the response-time clock this system exists to measure.</p>
+
+        <p>The system still does the difficult part &mdash; it finds the pair, weighs the evidence, names which record should survive, and explains why. A person performs the operation. The honest way to handle a limit like this is to <strong>state it in the interface</strong>, not to leave the button quietly missing.</p>
+
+        <h3>Writing Back Safely</h3>
+        <p><code>writer.py</code> is the only file that changes anything in Salesforce. Dry run is the default, so real writes need an explicit setting. Live values are re-read immediately before writing, because somebody may have edited the record since the proposal was created &mdash; if the field already holds the correct value, the writer skips it and says so. Only the fields in the proposal are touched, and every change is recorded with the before value, the after value, the approver, and whether the run was live.</p>
+
+        <figure class="project-figure">
+            <img src="images/crosscheck-06-proposed-fix.png" alt="Proposed fix showing Country changing from empty to Germany with the reasoning">
+            <figcaption>A proposed fix, with the before value, the after value, and the reason the system inferred it.</figcaption>
+        </figure>
+
+        <h3>The Slack Layer</h3>
+        <p>After each batch of approvals is applied, the system posts one summary to Slack through an incoming webhook. Three decisions shaped it.</p>
+
+        <p><strong>One message per batch, never one per decision.</strong> A review of 95 items would otherwise produce 95 notifications. By about number 20 somebody mutes the channel, and then the one message that mattered gets missed too.</p>
+
+        <p><strong>No LLM writes the message.</strong> It is counting plus a template. Using an LLM here would spend tokens on arithmetic and contradict the first design rule.</p>
+
+        <p><strong>Slack is not the audit trail.</strong> The audit trail is the database table with every before and after value, the approver, and whether the run was live. Slack is where a team <em>notices</em> that the trail has new entries. Slack&rsquo;s free plan even hides messages older than 90 days, which makes the point by itself.</p>
+
+        <p>The message names every record updated with its before and after value, every duplicate pair kept apart, and anything the reviewer overruled. A count of refusals tells a reader nothing useful. <strong>Which companies were kept apart is the fact a reviewer can actually check.</strong></p>
+
+        <div class="figure-pair">
+            <figure>
+                <img src="images/crosscheck-08-slack-updated.png" alt="Slack digest listing 18 records updated with before and after values">
+                <figcaption>A batch that wrote 18 records, each one named.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/crosscheck-09-slack-nothing-changed.png" alt="Slack digest showing 30 decided and 6 escalated with nothing written">
+                <figcaption>A live run that correctly changed nothing, and says so.</figcaption>
+            </figure>
+        </div>
+
+        <h3>Results</h3>
+        <p>Measured on synthetic data, from one full run.</p>
+
+        <p>A full scan produces <strong>95 proposals</strong> from <strong>9 Salesforce API calls</strong> and roughly <strong>31 LLM calls</strong>. Nine API calls for 481 records is possible because queries are batched rather than run per record.</p>
+
+        <p>Thirty-one LLM calls for 95 proposals is the more interesting number. All 18 stuck leads are solved by rules with <strong>zero AI calls</strong>. Of the 36 conflicts, 26 are solved by rule because the CRM owns lifecycle stage. Only the phone conflicts reach the LLM.</p>
+
+        <p><strong>Cost scales with ambiguity, not with volume.</strong> Total LLM spend for the entire project, including all development and testing: <strong>&euro;1.03</strong>.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>What happened to all 95 decisions</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Written to Salesforce</td><td>18</td></tr>
+                <tr><td>Decided, nothing needed changing</td><td>54</td></tr>
+                <tr><td>Handed off to a person</td><td>16</td></tr>
+                <tr><td>Escalated &mdash; evidence not decisive</td><td>6</td></tr>
+                <tr><td>Declined by the reviewer</td><td>1</td></tr>
+            </tbody>
+        </table>
+
+        <blockquote class="note">Ninety-five decisions. Thirty-four audit entries. Eighteen records changed. Sixty-one wrote nothing at all.</blockquote>
+
+        <p>One proposal was rejected by hand. A contact marked as a sales qualified lead had a lead score of 43, while everything else marked the same way scored in the 80s. Creating that record would have imported a marketing data error into the CRM rather than fixing it. The individual record is not the point &mdash; <strong>a queue where all 95 items are approved is not evidence that anyone reviewed them.</strong></p>
+
+        <h4>Idempotency, measured</h4>
+        <p>After all 95 proposals were reviewed and applied, I ran a full scan again:</p>
+
+        <pre class="terminal">stuck        found 18   queued 0   escalated 0
+crosssystem  found 51   queued 0   escalated 0
+duplicate    found 26   queued 0   escalated 0
+Pending proposals: 0
+API calls this run: 9</pre>
+
+        <p>Every issue was found again and nothing was proposed again, because each one already had a resolved proposal under a matching key. <strong>Zero LLM calls, nine API calls.</strong></p>
+
+        <h4>Evaluation, and why I do not quote the accuracy number</h4>
+        <p>I wrote a golden test set of 29 cases by hand from the defect manifest, and ran three prompt versions against it.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Measure</th>
+                    <th>v1</th>
+                    <th>v2</th>
+                    <th>v3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Correct</td><td>28</td><td>29</td><td>29</td></tr>
+                <tr><td>Escalated</td><td>12</td><td>12</td><td><strong>5</strong></td></tr>
+                <tr><td>Correct on hard cases</td><td>10/10</td><td>10/10</td><td>10/10</td></tr>
+            </tbody>
+        </table>
+
+        <p>All three versions score almost the same on accuracy. Not because all three prompts are equally good, but because <strong>most test cases can be decided from one clear identifier</strong>, and any competent model gets those right regardless of the prompt. So &ldquo;100% accurate&rdquo; would describe my test set, not my system. I do not use that number.</p>
+
+        <p>The useful column is escalations. <strong>Version 3 cut them from 12 to 5 &mdash; 58% fewer items needing a human &mdash; while accuracy stayed the same.</strong> That is a real improvement, and it is measurable exactly <em>because</em> accuracy did not move.</p>
+
+        <p>Two limitations I would rather state than have someone find: the golden set comes from the same manifest that generated the data, so it measures internal consistency more than external correctness; and 29 cases is a small sample, which is why I report counts rather than percentages with decimal places.</p>
+
+        <h3>Problems I Hit, and What I Did About Them</h3>
+
+        <h4>The test harness blamed the system for its own bug</h4>
+        <p>The first evaluation reported 13 cases as undetected, suggesting a serious detection problem. The system had detected all of them &mdash; the harness had failed to match them up.</p>
+
+        <p>A test harness is code too, and it is trusted more than the thing it measures. Before accepting a bad result about the system, check the instrument. This one was wrong in the pessimistic direction, which is the lucky case &mdash; it caused an investigation. Wrong in the optimistic direction, it would simply have been believed.</p>
+
+        <h4>Configuration that depended on import order</h4>
+        <p>My <code>.env</code> file said <code>USE_STUB=false</code>, but every escalation was still answered by the stub. No error, no warning. The setting was read at import time without loading the environment first, so the behaviour depended on which module had been imported first.</p>
+
+        <p>The fix was to load configuration in the module that uses it, and to print the active mode at startup. <strong>The same bug appeared a second time</strong> in the file that writes to Salesforce. That time it failed safely &mdash; but by accident of which string was chosen as the default, not by design. A safety property that depends on a person remembering is not a safety property.</p>
+
+        <h4>The measurement was pointed at the wrong thing</h4>
+        <p>The baseline count of &ldquo;stuck leads&rdquo; counts leads whose <strong>owner is a queue</strong>. The check fixes the blank <strong>Country</strong> field that caused routing to fail. But filling in the country does not reassign the lead &mdash; Salesforce only reassigns when assignment rules exist, and a Developer Edition org has none.</p>
+
+        <p>So the headline number could not move, even though every fix was correct. The number that did move was the sub-count: <strong>blank countries on queue-owned leads, 18 &rarr; 0.</strong></p>
+
+        <blockquote class="note">The snapshot was measuring the symptom while the check was fixing the cause.</blockquote>
+
+        <p>I could have made the chart look better by redefining &ldquo;stuck&rdquo; so the total would fall. I did not, because that is changing the measurement after seeing the result. This is the second time in the project that the <em>measurement</em> was wrong rather than the thing being measured. Both are written up, because finding them is evidence of the same care the project argues for.</p>
+
+        <h3>What I Would Do Differently at Real Scale</h3>
+        <ul>
+            <li><strong>React to changes, not to a schedule.</strong> At real volume you subscribe to Salesforce Change Data Capture and evaluate records as they change. A full-org scan is right for 481 records and wrong for 4.8 million.</li>
+            <li><strong>Grant autonomy per issue type, never globally.</strong> Format cleanup could become fully automatic quite quickly. Merging companies might stay human-approved forever. Autonomy should be earned by an issue type, not given to a whole system.</li>
+            <li><strong>Use real company registry data</strong> &mdash; Dutch KVK, UK Companies House &mdash; so the duplicate candidates are ones I did not design myself.</li>
+        </ul>
+
+        <h3>Should You Build This or Buy It?</h3>
+        <p>Worth answering honestly, because a portfolio project that claims to beat commercial software is not credible.</p>
+
+        <p><strong>For deduplication alone: buy it.</strong> That problem is solved. Cloudingo and LeanData do it well and my project is not better than they are.</p>
+
+        <p>What those tools do not cover is the <strong>cross-system layer</strong>. They live inside one platform and do not check whether the CRM agrees with a marketing platform, a billing system, or a partner&rsquo;s spreadsheet. And they do not solve the judgement calls they escalate anyway &mdash; a 0.87 match score does not explain itself in a sentence a human can check in three seconds.</p>
+
+        <p>So: buy the commodity, and build the thin layer on top that is specific to how your own funnel actually breaks.</p>
+
+        <h3>Technologies &amp; Techniques</h3>
+        <ul>
+            <li><strong>Python:</strong> Used for all detection, adjudication, writing, and evaluation logic.</li>
+            <li><strong>Salesforce REST API:</strong> Used with OAuth 2.0 client credentials, batched queries, and runtime schema reading through the <code>describe</code> endpoint.</li>
+            <li><strong>Google Sheets API:</strong> Used as the second system, with a CSV fallback and a timeout so an unreachable sheet fails quickly instead of hanging.</li>
+            <li><strong>Gemini:</strong> Used for adjudication with a pinned model version, temperature 0, JSON mode, and graceful degradation when quota runs out.</li>
+            <li><strong>SQLite:</strong> Used for the proposal queue, audit log, and run history.</li>
+            <li><strong>Streamlit:</strong> Used to build the human review interface.</li>
+            <li><strong>Slack Incoming Webhooks:</strong> Used to send one digest per batch of applied decisions.</li>
+            <li><strong>Prompt Engineering:</strong> Three versioned prompt files, compared against a golden test set.</li>
+            <li><strong>Validation &amp; Schema Checking:</strong> Four gates applied to every LLM response.</li>
+            <li><strong>Idempotency Keys:</strong> Used so the same issue is never proposed twice.</li>
+            <li><strong>Unit Testing:</strong> 70 tests, no API calls, about one second to run.</li>
+        </ul>
+
+        <p>The model version is pinned rather than set to &ldquo;latest&rdquo; for two reasons. The evaluation compares prompt versions against a fixed test set, so a model changing underneath would make any difference unattributable. And the audit log records the model version alongside the prompt version, so every past decision must stay reproducible.</p>
+
+        <h3>Conclusion</h3>
+        <p>Cross-Check brings together <strong>cross-system data comparison, deterministic rule engines, LLM adjudication with structured output, validation gates, human-in-the-loop approval, safe write-back with a full audit trail, and Slack notification</strong> into one working application.</p>
+
+        <p>The technical challenge was not calling an LLM. That part is easy. The challenge was building a system that decides what to send to the AI at all, checks everything that comes back, and knows where to stop.</p>
+
+        <p>Of 95 decisions in one run, <strong>18 changed a record and 61 correctly changed nothing.</strong></p>
+
+        <p>Most AI tooling is judged by how much it does. For anything that writes into a business system of record, I think the more useful question is whether it knows when not to.</p>
+
+        <p>The full code, including the data generator, the three prompt versions, the evaluation harness and the test suite, is on GitHub: <a href="https://github.com/Vizbase/Cross-Check" target="_blank">github.com/Vizbase/Cross-Check</a>. All data in this project is synthetic.</p>
+
+        <p><a class="btn btn-primary" href="projects.html">Back</a></p>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a class="cc-twitter btn btn-link" href="https://twitter.com/vizbase" target="_blank">
+                <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-github btn btn-link" href="https://github.com/Vizbase" target="_blank">
+                <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-instagram btn btn-link" href="https://instagram.com/vizbase" target="_blank">
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="cc-email btn btn-link" href="mailto:mozooni.soroush@gmail.com">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="h4 title text-center">Soroush Mozooni</div>
+    </footer>
+
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged screenshot">
+        <span id="lightbox-close" aria-hidden="true">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+        <div id="lightbox-caption"></div>
+    </div>
+
+    <script src="js/core/jquery.3.2.1.min.js?ver=1.1.0"></script>
+    <script src="js/core/popper.min.js?ver=1.1.0"></script>
+    <script src="js/core/bootstrap.min.js?ver=1.1.0"></script>
+    <script src="js/now-ui-kit.js?ver=1.1.0"></script>
+    <script src="js/aos.js?ver=1.1.0"></script>
+    <script src="scripts/main.js?ver=1.1.0"></script>
+    <script>
+        (function () {
+            var box = document.getElementById('lightbox');
+            var boxImg = document.getElementById('lightbox-img');
+            var boxCap = document.getElementById('lightbox-caption');
+            var images = document.querySelectorAll('.project-figure img, .figure-pair img');
+
+            function openBox(img) {
+                boxImg.src = img.src;
+                boxImg.alt = img.alt;
+                var fig = img.closest('figure');
+                var cap = fig ? fig.querySelector('figcaption') : null;
+                boxCap.textContent = cap ? cap.textContent : '';
+                box.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeBox() {
+                box.classList.remove('open');
+                document.body.style.overflow = '';
+                boxImg.src = '';
+            }
+
+            for (var i = 0; i < images.length; i++) {
+                images[i].addEventListener('click', function () {
+                    openBox(this);
+                });
+            }
+
+            box.addEventListener('click', closeBox);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeBox();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
